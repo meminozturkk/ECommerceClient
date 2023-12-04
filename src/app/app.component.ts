@@ -27,3 +27,6 @@ export class AppComponent {
 //   alert("asd")
 // })
 
+$.get("https://localhost:7076/api/Product",data => {
+  console.log(data)
+})
