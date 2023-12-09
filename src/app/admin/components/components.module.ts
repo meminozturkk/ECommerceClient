@@ -4,8 +4,7 @@ import { ProductsModule } from './products/products.module';
 import { OrderModule } from './orders/order.module';
 import { CustomerModule } from './customers/customer.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-
-
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [],
@@ -14,7 +13,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
     ProductsModule,
     OrderModule,
     CustomerModule,
-    DashboardModule
-  ]
+    DashboardModule,
+    MatSidenavModule,
+  ],
 })
-export class ComponentsModule { }
+export class ComponentsModule {}
