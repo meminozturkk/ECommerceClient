@@ -22,20 +22,20 @@ export class AppComponent {
     private toastr: CustomToastrService,
     private spinner: NgxSpinnerService
   ) {
-    this.toastr.message('merhaba', 'kullanici', {
-      messageType: ToastrMessageType.Error,
-      position: ToastrPosition.BottomCenter,
-    });
-    this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 1000);
+    // this.toastr.message('merhaba', 'kullanici', {
+    //   messageType: ToastrMessageType.Error,
+    //   position: ToastrPosition.BottomCenter,
+    // });
+    // this.spinner.show();
+    // setTimeout(() => {
+    //   this.spinner.hide();
+    // }, 1000);
   }
 }
 // $(document).ready(()=> {
 //   alert("asd")
 // })
 
-$.get('https://localhost:7076/api/Product', (data) => {
-  console.log(data);
-});
+// $.get('https://localhost:7076/api/Product', (data) => {
+//   console.log(data);
+// });

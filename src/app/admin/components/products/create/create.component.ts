@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { Create_Product } from 'src/app/contracts/create_product';
@@ -7,6 +7,7 @@ import {
   MessageType,
   Position,
 } from 'src/app/services/admin/alertify.service';
+import { FileUploadOptions } from 'src/app/services/common/file-upload/file-upload.component';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
 @Component({
@@ -25,6 +26,14 @@ export class CreateComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
+  @Output() createdProduct: EventEmitter<Create_Product> = new EventEmitter();
+  @Output() fileUploadOptions: Partial<FileUploadOptions> = {
+    action: 'upload',
+    controller: 'product',
+    explanation: 'Choose the photos',
+    isAdminPage: true,
+    accept: '.png, .jpg, .jpeg, .mp4',
+  };
   create(
     name: HTMLInputElement,
     stock: HTMLInputElement,
@@ -45,6 +54,7 @@ export class CreateComponent extends BaseComponent implements OnInit {
           messageType: MessageType.Success,
           position: Position.TopRight,
         });
+        this.createdProduct.emit(create_product);
       },
       (errorMessage) => {
         this.alertifyservice.message(errorMessage, {

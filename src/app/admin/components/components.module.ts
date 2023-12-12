@@ -5,6 +5,7 @@ import { OrderModule } from './orders/order.module';
 import { CustomerModule } from './customers/customer.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { FileUploadModule } from 'src/app/services/common/file-upload/file-upload.module';
 
 @NgModule({
   declarations: [],
@@ -15,6 +16,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     CustomerModule,
     DashboardModule,
     MatSidenavModule,
+    FileUploadModule,
   ],
 })
 export class ComponentsModule {}
