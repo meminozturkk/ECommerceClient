@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     ToastrModule.forRoot(),
     NgxSpinnerModule,
     HttpClientModule,
+    MatDialogModule,
   ],
   providers: [
     { provide: 'baseUrl', useValue: 'https://localhost:7076/api', multi: true },

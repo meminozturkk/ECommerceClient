@@ -12,6 +12,12 @@ import {
   ToastrMessageType,
   ToastrPosition,
 } from '../../ui/custom-toastr.service';
+import { MatDialog } from '@angular/material/dialog';
+import {
+  FileUploadDialogComponent,
+  FileUploadDialogState,
+} from 'src/app/dialogs/file-upload-dialog/file-upload-dialog.component';
+import { DialogService } from '../dialog.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -24,7 +30,9 @@ export class FileUploadComponent {
   constructor(
     private httpClientService: HttpClientService,
     private alterifyService: AlertifyService,
-    private customToastrService: CustomToastrService
+    private customToastrService: CustomToastrService,
+    private dialog: MatDialog,
+    private dialogService: DialogService
   ) {}
   public files: NgxFileDropEntry[];
   @Input() options: Partial<FileUploadOptions>;
@@ -37,44 +45,54 @@ export class FileUploadComponent {
         fileData.append(_file.name, _file, file.relativePath);
       });
     }
-    this.httpClientService
-      .post(
-        {
-          controller: this.options.controller,
-          action: this.options.action,
-          queryString: this.options.queryString,
-          headers: new HttpHeaders({ responseType: 'blob' }),
-        },
-        fileData
-      )
-      .subscribe(
-        (data) => {
-          if (this.options.isAdminPage) {
-            this.alterifyService.message(this.messageSuccess, {
-              messageType: MessageType.Success,
-              position: Position.TopRight,
-            });
-          } else {
-            this.customToastrService.message(this.messageSuccess, 'Success', {
-              messageType: ToastrMessageType.Success,
-              position: ToastrPosition.TopRight,
-            });
-          }
-        },
-        (errorResponse: HttpErrorResponse) => {
-          if (this.options.isAdminPage) {
-            this.alterifyService.message(this.messageWrong, {
-              messageType: MessageType.Warning,
-              position: Position.TopRight,
-            });
-          } else {
-            this.customToastrService.message(this.messageWrong, 'Sorry', {
-              messageType: ToastrMessageType.Warning,
-              position: ToastrPosition.TopRight,
-            });
-          }
-        }
-      );
+    this.dialogService.openDialog({
+      componentType: FileUploadDialogComponent,
+      data: FileUploadDialogState.Yes,
+      afterClosed: () => {
+        this.httpClientService
+          .post(
+            {
+              controller: this.options.controller,
+              action: this.options.action,
+              queryString: this.options.queryString,
+              headers: new HttpHeaders({ responseType: 'blob' }),
+            },
+            fileData
+          )
+          .subscribe(
+            (data) => {
+              if (this.options.isAdminPage) {
+                this.alterifyService.message(this.messageSuccess, {
+                  messageType: MessageType.Success,
+                  position: Position.TopRight,
+                });
+              } else {
+                this.customToastrService.message(
+                  this.messageSuccess,
+                  'Success',
+                  {
+                    messageType: ToastrMessageType.Success,
+                    position: ToastrPosition.TopRight,
+                  }
+                );
+              }
+            },
+            (errorResponse: HttpErrorResponse) => {
+              if (this.options.isAdminPage) {
+                this.alterifyService.message(this.messageWrong, {
+                  messageType: MessageType.Warning,
+                  position: Position.TopRight,
+                });
+              } else {
+                this.customToastrService.message(this.messageWrong, 'Sorry', {
+                  messageType: ToastrMessageType.Warning,
+                  position: ToastrPosition.TopRight,
+                });
+              }
+            }
+          );
+      },
+    });
   }
   public fileOver(event) {
     console.log(event);

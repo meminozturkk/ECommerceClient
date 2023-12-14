@@ -18,6 +18,7 @@ import {
   MessageType,
   Position,
 } from 'src/app/services/admin/alertify.service';
+import { DialogService } from 'src/app/services/common/dialog.service';
 import { HttpClientService } from 'src/app/services/common/http-client.service';
 
 import { ProductService } from 'src/app/services/common/models/product.service';
@@ -32,7 +33,8 @@ export class DeleteDirective {
     private element: ElementRef,
     private renderer: Renderer2,
     private httpClientService: HttpClientService,
-    private alertifyService: AlertifyService
+    private alertifyService: AlertifyService,
+    private dialogService: DialogService
   ) {
     const img = renderer.createElement('img');
     img.setAttribute('src', 'assets/delete-24.png');
@@ -46,45 +48,49 @@ export class DeleteDirective {
   @Output() updateList: EventEmitter<any> = new EventEmitter();
   @HostListener('click')
   async onclick(afterClosed: any) {
-    this.openDialog(async () => {
-      const td: HTMLTableCellElement = this.element.nativeElement;
-      this.httpClientService
-        .delete(
-          {
-            controller: this.controller,
-          },
-          this.id
-        )
-        .subscribe(
-          (data) => {
-            $(td.parentElement).fadeOut(200, () => {
-              this.updateList.emit();
-              this.alertifyService.message('Item deleted succesfully', {
-                messageType: MessageType.Success,
-                position: Position.TopRight,
-              });
-            });
-          },
-          (errorResponse: HttpErrorResponse) => {
-            this.alertifyService.message(
-              'A problem occurred while deleting the item.',
-              {
-                messageType: MessageType.Error,
-                position: Position.TopCenter,
-              }
-            );
-          }
-        );
-    });
-  }
-  openDialog(afterClosed: any): void {
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+    this.dialogService.openDialog({
+      componentType: DeleteDialogComponent,
       data: DeleteState.Yes,
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result == DeleteState.Yes) {
-        afterClosed();
-      }
+      afterClosed: () => {
+        const td: HTMLTableCellElement = this.element.nativeElement;
+        this.httpClientService
+          .delete(
+            {
+              controller: this.controller,
+            },
+            this.id
+          )
+          .subscribe(
+            (data) => {
+              $(td.parentElement).fadeOut(200, () => {
+                this.updateList.emit();
+                this.alertifyService.message('Item deleted succesfully', {
+                  messageType: MessageType.Success,
+                  position: Position.TopRight,
+                });
+              });
+            },
+            (errorResponse: HttpErrorResponse) => {
+              this.alertifyService.message(
+                'A problem occurred while deleting the item.',
+                {
+                  messageType: MessageType.Error,
+                  position: Position.TopCenter,
+                }
+              );
+            }
+          );
+      },
     });
   }
+  // openDialog(afterClosed: any): void {
+  //   const dialogRef = this.dialog.open(DeleteDialogComponent, {
+  //     data: DeleteState.Yes,
+  //   });
+  //   dialogRef.afterClosed().subscribe((result) => {
+  //     if (result == DeleteState.Yes) {
+  //       afterClosed();
+  //     }
+  //   });
+  // }
 }
