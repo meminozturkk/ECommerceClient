@@ -7,6 +7,13 @@ import {
   Validators,
 } from '@angular/forms';
 import { User } from '../../../entities/user';
+import { UserService } from 'src/app/services/common/models/user.service';
+import {
+  CustomToastrService,
+  ToastrMessageType,
+  ToastrPosition,
+} from 'src/app/services/ui/custom-toastr.service';
+import { Create_User } from 'src/app/contracts/create_user';
 
 @Component({
   selector: 'app-register',
@@ -14,14 +21,18 @@ import { User } from '../../../entities/user';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private toastrService: CustomToastrService
+  ) {}
 
   frm: FormGroup;
 
   ngOnInit(): void {
     this.frm = this.formBuilder.group(
       {
-        adSoyad: [
+        nameSurname: [
           '',
           [
             Validators.required,
@@ -29,7 +40,7 @@ export class RegisterComponent implements OnInit {
             Validators.minLength(3),
           ],
         ],
-        kullaniciAdi: [
+        username: [
           '',
           [
             Validators.required,
@@ -41,13 +52,13 @@ export class RegisterComponent implements OnInit {
           '',
           [Validators.required, Validators.maxLength(250), Validators.email],
         ],
-        sifre: ['', [Validators.required]],
-        sifreTekrar: ['', [Validators.required]],
+        password: ['', [Validators.required]],
+        passwordConfirm: ['', [Validators.required]],
       },
       {
         validators: (group: AbstractControl): ValidationErrors | null => {
-          let sifre = group.get('sifre').value;
-          let sifreTekrar = group.get('sifreTekrar').value;
+          let sifre = group.get('password').value;
+          let sifreTekrar = group.get('passwordConfirm').value;
           return sifre === sifreTekrar ? null : { notSame: true };
         },
       }
@@ -59,10 +70,19 @@ export class RegisterComponent implements OnInit {
   }
 
   submitted: boolean = false;
-  onSubmit(data: User) {
+  async onSubmit(user: User) {
     this.submitted = true;
-
-    debugger;
     if (this.frm.invalid) return;
+    const result: Create_User = await this.userService.create(user);
+    if (result.succeeded)
+      this.toastrService.message(result.message, 'User created', {
+        messageType: ToastrMessageType.Success,
+        position: ToastrPosition.TopRight,
+      });
+    else
+      this.toastrService.message(result.message, 'Error', {
+        messageType: ToastrMessageType.Error,
+        position: ToastrPosition.TopRight,
+      });
   }
 }
