@@ -13,8 +13,12 @@
             <a class="nav-link" routerLink="basket">Basket</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="register">Register</a>
+            <a class="nav-link active" aria-current="page" routerLink="login" *ngIf="!authService.isAuthenticated" >Giriş Yap</a>
+        </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="register" *ngIf="!authService.isAuthenticated" >Register</a>
           </li>
+       
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" routerLink="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Dropdown
@@ -27,12 +31,15 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="admin">Yönetim Paneli</a>
+            <a class="nav-link" routerLink="admin" *ngIf="authService.isAuthenticated" >Yönetim Paneli</a>
           </li>
           
           <li class="nav-item">
 
             <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          </li>
+          <li>
+            <a class="nav-link active" aria-current="page" style="color:red;cursor:pointer;" (click)="signOut()" *ngIf="authService.isAuthenticated">Çıkış Yap</a>
           </li>
         </ul>
         <form class="d-flex" role="search">

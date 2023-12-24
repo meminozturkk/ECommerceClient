@@ -4,19 +4,21 @@ import { LayoutComponent } from './admin/layout/layout.component';
 import { CustomerComponent } from './admin/components/customers/customer.component';
 import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
 import { HomeComponent } from './ui/components/home/home.component';
+import { AuthGuard } from './guards/common/auth.guard';
 
 const routes: Routes = [
   {
     path: 'admin',
     component: LayoutComponent,
     children: [
-      { path: '', component: DashboardComponent },
+      { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
       {
         path: 'customers',
         loadChildren: () =>
           import('./admin/components/customers/customer.module').then(
             (module) => module.CustomerModule
           ),
+        canActivate: [AuthGuard],
       },
       {
         path: 'products',
@@ -24,6 +26,7 @@ const routes: Routes = [
           import('./admin/components/products/products.module').then(
             (module) => module.ProductsModule
           ),
+        canActivate: [AuthGuard],
       },
       {
         path: 'orders',
@@ -55,6 +58,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./ui/components/register/register.module').then(
         (module) => module.RegisterModule
+      ),
+  },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./ui/components/login/login.module').then(
+        (module) => module.LoginModule
       ),
   },
 ];

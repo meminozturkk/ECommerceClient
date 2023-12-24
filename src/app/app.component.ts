@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from './services/common/auth.service';
 import {
   CustomToastrService,
   ToastrMessageType,
   ToastrPosition,
 } from './services/ui/custom-toastr.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 declare var $: any;
 
@@ -19,23 +20,19 @@ export class AppComponent {
    *
    */
   constructor(
-    private toastr: CustomToastrService,
-    private spinner: NgxSpinnerService
+    public authService: AuthService,
+    private toastrService: CustomToastrService,
+    private router: Router
   ) {
-    // this.toastr.message('merhaba', 'kullanici', {
-    //   messageType: ToastrMessageType.Error,
-    //   position: ToastrPosition.BottomCenter,
-    // });
-    // this.spinner.show();
-    // setTimeout(() => {
-    //   this.spinner.hide();
-    // }, 1000);
+    authService.identityCheck();
+  }
+  signOut() {
+    localStorage.removeItem('accessToken');
+    this.authService.identityCheck();
+    this.router.navigate(['']);
+    this.toastrService.message('Oturum kapatılmıştır!', 'Oturum Kapatıldı', {
+      messageType: ToastrMessageType.Warning,
+      position: ToastrPosition.TopRight,
+    });
   }
 }
-// $(document).ready(()=> {
-//   alert("asd")
-// })
-
-// $.get('https://localhost:7076/api/Product', (data) => {
-//   console.log(data);
-// });
