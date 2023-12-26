@@ -1,29 +1,46 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
-import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
+import { HubUrls } from 'src/app/contracts/hub-url';
+import { ReceiveFunctions } from 'src/app/contracts/reveive-functions';
+import {
+  AlertifyService,
+  MessageType,
+  Position,
+} from 'src/app/services/admin/alertify.service';
+import { SignalRService } from 'src/app/services/common/signalr.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent extends BaseComponent implements OnInit{
-
-
-  constructor(private alertify:AlertifyService, spinner: NgxSpinnerService) {
+export class DashboardComponent extends BaseComponent implements OnInit {
+  constructor(
+    private alertify: AlertifyService,
+    spinner: NgxSpinnerService,
+    private signalRService: SignalRService
+  ) {
     super(spinner);
-
+    signalRService.start(HubUrls.ProductHub);
   }
   ngOnInit(): void {
-    this.showSpinner(SpinnerType.BallScaleMultiple)
+    this.showSpinner(SpinnerType.BallScaleMultiple);
+    this.signalRService.on(
+      ReceiveFunctions.ProductAddedMessageReceiveFunction,
+      (message) => {
+        this.alertify.message(message, {
+          messageType: MessageType.Notify,
+          position: Position.TopRight,
+        });
+      }
+    );
   }
-  m(){
-    this.alertify.message("merhaba", {
-    messageType: MessageType.Success,
-    }
-    )
+  m() {
+    this.alertify.message('merhaba', {
+      messageType: MessageType.Success,
+    });
   }
-  d(){
-    this.alertify.dismiss()
+  d() {
+    this.alertify.dismiss();
   }
 }
