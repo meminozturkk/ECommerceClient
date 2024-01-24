@@ -9,9 +9,9 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" routerLink="products">Products</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" routerLink="basket">Basket</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" routerLink="login" *ngIf="!authService.isAuthenticated" >Giriş Yap</a>
         </li>
@@ -19,7 +19,7 @@
             <a class="nav-link" routerLink="register" *ngIf="!authService.isAuthenticated" >Register</a>
           </li>
        
-          <li class="nav-item dropdown">
+          <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" routerLink="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Dropdown
             </a>
@@ -29,15 +29,15 @@
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" routerLink="">Something else here</a></li>
             </ul>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" routerLink="admin" *ngIf="authService.isAuthenticated" >Yönetim Paneli</a>
           </li>
           
-          <li class="nav-item">
+          <!-- <li class="nav-item">
 
             <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li>
+          </li> -->
           <li>
             <a class="nav-link active" aria-current="page" style="color:red;cursor:pointer;" (click)="signOut()" *ngIf="authService.isAuthenticated">Çıkış Yap</a>
           </li>
@@ -47,9 +47,18 @@
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </div>
+      <div class="d-flex">
+        <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit" (click)="loadComponent()" >Sepet</button>
+      </div>
     </div>
   </nav>
 <router-outlet></router-outlet>
 <ngx-spinner type="square-jelly-box" name="s1"></ngx-spinner>
 <ngx-spinner type="ball-beat" name="s2"></ngx-spinner>
 <ngx-spinner type="ball-scale-multiple" name="s3"></ngx-spinner>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <ng-template appDynamicLoadComponent></ng-template>
+  </div>
+</div>

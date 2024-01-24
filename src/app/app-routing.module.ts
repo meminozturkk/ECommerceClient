@@ -67,6 +67,13 @@ const routes: Routes = [
         (module) => module.LoginModule
       ),
   },
+  {
+    path: 'products/:pageNo',
+    loadChildren: () =>
+      import('./ui/components/products/products.module').then(
+        (module) => module.ProductsModule
+      ),
+  },
 ];
 
 @NgModule({

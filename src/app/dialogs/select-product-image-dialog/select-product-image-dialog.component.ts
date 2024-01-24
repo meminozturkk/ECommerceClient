@@ -60,6 +60,17 @@ export class SelectProductImageDialogComponent
       },
     });
   }
+  showCase(imageId: string) {
+    this.spinner.show(SpinnerType.BallBeat);
+
+    this.productService.changeShowcaseImage(
+      imageId,
+      this.data as string,
+      () => {
+        this.spinner.hide(SpinnerType.BallBeat);
+      }
+    );
+  }
   @Output() options: Partial<FileUploadOptions> = {
     accept: '.png, .jpg, .jpeg, .gif, .mp4',
     action: 'upload',
