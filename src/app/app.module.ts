@@ -49,6 +49,11 @@ import { DynamicLoadComponentDirective } from './directives/common/dynamic-load-
       multi: true,
     },
     {
+      provide: 'baseSignalRUrl',
+      useValue: 'https://localhost:7076/',
+      multi: true,
+    },
+    {
       provide: 'SocialAuthServiceConfig',
 
       useValue: {

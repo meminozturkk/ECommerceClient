@@ -4,6 +4,14 @@ import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { List_Basket_Item } from 'src/app/contracts/List_Basket_Item';
 import { Update_Basket_Item } from 'src/app/contracts/Update_Basket_Item';
 import { BasketService } from 'src/app/services/common/models/basket.service';
+import { Router } from '@angular/router';
+import {
+  CustomToastrService,
+  ToastrMessageType,
+  ToastrPosition,
+} from 'src/app/services/ui/custom-toastr.service';
+import { Create_Order } from 'src/app/contracts/create_order';
+import { OrderService } from 'src/app/services/common/models/order.service';
 
 declare var $: any;
 
@@ -15,7 +23,10 @@ declare var $: any;
 export class BasketsComponent extends BaseComponent implements OnInit {
   constructor(
     spinner: NgxSpinnerService,
-    private basketService: BasketService
+    private basketService: BasketService,
+    private orderService: OrderService,
+    private toastrService: CustomToastrService,
+    private router: Router
   ) {
     super(spinner);
   }
@@ -46,5 +57,18 @@ export class BasketsComponent extends BaseComponent implements OnInit {
     $('.' + basketItemId).fadeOut(500, () =>
       this.hideSpinner(SpinnerType.BallBeat)
     );
+  }
+  async shoppingComplete() {
+    this.showSpinner(SpinnerType.BallBeat);
+    const order: Create_Order = new Create_Order();
+    order.address = 'Yenimahalle';
+    order.description = 'Falanca filanca...';
+    await this.orderService.create(order);
+    this.hideSpinner(SpinnerType.BallBeat);
+    this.toastrService.message('Sipariş alınmıştır!', 'Sipariş Oluşturuldu!', {
+      messageType: ToastrMessageType.Info,
+      position: ToastrPosition.TopRight,
+    });
+    this.router.navigate(['/']);
   }
 }
