@@ -6,6 +6,8 @@ import { CustomerModule } from './customers/customer.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FileUploadModule } from 'src/app/services/common/file-upload/file-upload.module';
+import { DeleteDirective } from '../../directives/admin/delete.directive';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
