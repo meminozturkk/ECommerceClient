@@ -1,14 +1,22 @@
 :host {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center; /* Form alanlarını dikey olarak hizala */
   }
-.create-product{
-    margin: 5px 5px 5px 5px;
-}
-.btn{
-    background-color: blue !important;
-    margin-left: 30%;
-    border: 2px solid blue;
-    color:white
-}
+  
+  .create-product {
+    margin: 5px; /* Form alanları arasındaki boşluk */
+    width: 100%; /* Form alanlarının genişliğini ayarla */
+  }
+  
+  .mat-form-field {
+    width: 100%; /* Form alanlarının genişliğini ayarla */
+  }
+  
+  .btn {
+    background-color: #1976d2; /* Mavi renk kullan */
+    border: none; /* Kenarlık olmadan */
+    color: #fff; /* Beyaz metin rengi */
+    margin-top: 10px; /* Butonun üstündeki boşluk */
+  }
+  

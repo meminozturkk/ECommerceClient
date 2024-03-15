@@ -1,4 +1,52 @@
-table {
-    width: 100%;
-    height: 100%;
-}
+/* Tablo container'ı için stiller */
+.table-container {
+    overflow-x: auto; /* Tablo yatay kaydırma */
+    max-width: 100%; /* Tablo maksimum genişlik */
+    margin-bottom: 20px; /* Tablo altındaki boşluk */
+    overflow-y: hidden;
+  }
+  
+  /* Tablo için genel stiller */
+  .mat-table {
+    width: 100%; /* Tablo genişliği */
+    border-collapse: collapse; /* Hücreler arasında kenarlık birleştirme */
+    background-color: #333; /* Tablo arka plan rengi */
+    color: #fff; /* Tablo metin rengi */
+  }
+  
+  /* Tablo başlığı için stiller */
+  .mat-table th,
+  .mat-table td {
+    padding: 8px; /* Hücre iç boşlukları */
+    text-align: left; /* Metin hücrenin soluna hizala */
+    border-bottom: 1px solid #555; /* Hücre alt kenarlık rengi */
+  }
+  
+  /* Tablo başlık hücreleri için stiller */
+  .mat-table th {
+    background-color: #666; /* Başlık arka plan rengi */
+  }
+  
+  /* Tablo veri hücreleri için stiller */
+  .mat-table td {
+    background-color: #444; /* Hücre arka plan rengi */
+  }
+  
+  /* Tablo satırları üzerine gelindiğinde arka plan rengi değişimi */
+  .mat-table tr:hover {
+    background-color: #555; /* Fare üzerine gelindiğinde satırın arka plan rengi */
+  }
+  
+  /* Sayfalama için stiller */
+  .mat-paginator {
+    margin-top: 20px; /* Sayfalama üstündeki boşluk */
+  }
+  
+  /* Mobil uyumluluk için media query */
+  @media (max-width: 600px) {
+    .mat-table th,
+    .mat-table td {
+      font-size: 14px; /* Mobil cihazlarda metin boyutunu küçült */
+    }
+  }
+  

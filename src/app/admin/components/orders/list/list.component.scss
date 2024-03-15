@@ -1,3 +1,43 @@
-table {
-    width: 100%;
-  }
+/* Tablo stilleri */
+.mat-elevation-z8 {
+  border: 1px solid #333; /* Kenarlık rengi */
+  border-radius: 8px; /* Köşe yuvarlaklığı */
+  overflow: hidden; /* Taşan içeriği gizle */
+  background-color: #444; /* Arka plan rengi */
+  color: #fff; /* Metin rengi */
+}
+
+/* Tablo başlık hücrelerinin stilleri */
+.mat-table th {
+  background-color: #555; /* Arka plan rengi */
+  font-weight: bold; /* Kalın metin */
+}
+
+/* Tablo hücrelerinin arka plan rengi */
+.mat-table td {
+  background-color: #333; /* Arka plan rengi */
+  padding: 12px 16px; /* İç boşluk */
+  text-align: left; /* Metin hücrenin soluna hizala */
+}
+
+/* Tablo satırları üzerine gelindiğinde arka plan rengi değişimi */
+.mat-table tr:hover {
+  background-color: #666; /* Fare üzerine gelindiğinde satırın arka plan rengi */
+}
+
+/* Sütun genişliklerini belirle */
+.mat-column-orderCode,
+.mat-column-userName,
+.mat-column-totalPrice,
+.mat-column-createdDate,
+.mat-column-completed,
+.mat-column-viewdetail,
+.mat-column-delete {
+  width: 120px; /* Sabit genişlik */
+}
+
+/* Simgelerin stil düzenlemeleri */
+.mat-icon {
+  vertical-align: middle; /* Simgeleri dikey hizala */
+  margin-right: 5px; /* Sağ boşluk */
+}

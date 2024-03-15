@@ -1,0 +1,31 @@
+.app-list-container {
+    margin: 20px; /* Add margin around the container */
+    padding: 10px; /* Add padding inside the container */
+    background-color: #f5f5f5; /* Set background color */
+    border-radius: 10px; /* Add border radius for rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  }
+  
+  .app-list-item {
+    padding: 10px; /* Add padding for each list item */
+    border-bottom: 1px solid #ddd; /* Add border bottom to separate items */
+  }
+  
+  .app-list-item:last-child {
+    border-bottom: none; /* Remove border bottom for the last item */
+  }
+  
+  .app-list-item:hover {
+    background-color: #e0e0e0; /* Change background color on hover */
+    cursor: pointer; /* Change cursor to pointer on hover */
+  }
+  
+  .app-list-item a {
+    text-decoration: none; /* Remove default underline from links */
+    color: #333; /* Set text color */
+  }
+  
+  .app-list-item a:hover {
+    text-decoration: underline; /* Add underline on hover for links */
+  }
+  

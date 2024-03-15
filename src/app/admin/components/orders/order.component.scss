@@ -1,0 +1,55 @@
+/* Ana container */
+.mat-elevation-z8 {
+    border: 1px solid #555; /* Kenarlık rengi */
+    border-radius: 8px; /* Köşe yuvarlaklığı */
+    overflow: hidden; /* Taşan içeriği gizle */
+    background-color: #333; /* Arka plan rengi */
+    color: #fff; /* Metin rengi */
+  }
+  
+  /* Tablo başlığı */
+  .mat-table th {
+    background-color: #555; /* Arka plan rengi */
+    font-weight: bold; /* Kalın metin */
+  }
+  
+  /* Tablo hücreleri */
+  .mat-table td {
+    background-color: #444; /* Arka plan rengi */
+    padding: 12px 16px; /* İç boşluk */
+    text-align: left; /* Metni hücrenin soluna hizala */
+  }
+  
+  /* Fare üzerine gelindiğinde tablo satırı */
+  .mat-table tr:hover {
+    background-color: #666; /* Arka plan rengi */
+  }
+  
+  /* Simge stil düzenlemeleri */
+  .mat-icon {
+    vertical-align: middle; /* Dikey hizalama */
+    margin-right: 5px; /* Sağ boşluk */
+  }
+  
+  /* Açılır menü stilleri */
+  .mat-select-trigger {
+    color: #fff; /* Metin rengi */
+    background-color: #555; /* Arka plan rengi */
+    border-radius: 4px; /* Köşe yuvarlaklığı */
+  }
+  
+  /* Açılır menü içeriği */
+  .mat-select-content {
+    background-color: #555; /* Arka plan rengi */
+  }
+  
+  /* Açılır menü öğeleri */
+  .mat-option {
+    color: #fff; /* Metin rengi */
+  }
+  
+  /* Açılır menü öğeleri üzerine gelindiğinde */
+  .mat-option:hover {
+    background-color: #444; /* Arka plan rengi */
+  }
+  

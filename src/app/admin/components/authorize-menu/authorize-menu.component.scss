@@ -1,0 +1,25 @@
+/* Ana düğüm düğmeleri */
+.node-button {
+    margin-right: 8px; /* Düğme arasındaki boşluk */
+  }
+  
+  /* Rol Ata düğmesi */
+  .assign-role-button {
+    margin-left: 8px; /* Düğme arasındaki boşluk */
+  }
+  
+  /* Alt düğüm düğmeleri */
+  .node-toggle-button {
+    margin-right: 8px; /* Düğme arasındaki boşluk */
+  }
+  
+  /* Ana ve alt düğümlerin genel stili */
+  .tree-node {
+    display: flex; /* Düğümleri yatay olarak hizala */
+    align-items: center; /* Düğümleri dikey olarak hizala */
+  }
+  
+  /* Düğüm içeriği */
+  .node-content {
+    flex-grow: 1; /* İçeriği genişletmek için */
+  }

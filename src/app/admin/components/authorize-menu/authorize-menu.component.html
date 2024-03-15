@@ -1,0 +1,24 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <!-- Ana düğümler -->
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding class="tree-node">
+      <button mat-icon-button disabled class="node-button">
+        <mat-icon>lock</mat-icon>
+      </button>
+      <span class="node-content">
+        <span>{{node.name}}</span>
+        <button mat-button color="primary" class="assign-role-button" (click)="assignRole(node.code, node.name)">
+          Rol Ata
+        </button>
+      </span>
+    </mat-tree-node>
+  
+    <!-- Alt düğümler -->
+    <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding class="tree-node">
+      <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name" class="node-toggle-button">
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+      </button>
+      <span class="node-content">{{node.name}}</span>
+    </mat-tree-node>
+  </mat-tree>

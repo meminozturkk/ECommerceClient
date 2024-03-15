@@ -12,11 +12,16 @@ import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-dialog.component';
+import { CompleteOrderDialogComponent } from './complete-order-dialog/complete-order-dialog.component';
+import { AuthorizeMenuDialogComponent } from './authorize-menu-dialog/authorize-menu-dialog.component';
+import { MatBadgeModule } from '@angular/material/badge';
 @NgModule({
   declarations: [
     DeleteDialogComponent,
     SelectProductImageDialogComponent,
     OrderDetailDialogComponent,
+    CompleteOrderDialogComponent,
+    AuthorizeMenuDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -28,6 +33,7 @@ import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-d
     MatCardModule,
     MatTableModule,
     MatToolbarModule,
+    MatBadgeModule,
   ],
 })
 export class DialogsModule {}

@@ -35,6 +35,14 @@ const routes: Routes = [
             (module) => module.OrderModule
           ),
       },
+      {
+        path: 'authorize-menu',
+        loadChildren: () =>
+          import(
+            './admin/components/authorize-menu/authorize-menu.module'
+          ).then((module) => module.AuthorizeMenuModule),
+        canActivate: [AuthGuard],
+      },
     ],
   },
 

@@ -1,11 +1,70 @@
-// .mat-list {
-//     color: #444;
-//   }
-//   .listitem{
-//     color: rgb(0, 0, 0);
-//     background-color: #444;
-//   }
-.custom-list-item {
-    color: black !important;
-  }
-  
+.sidebar {
+  background-color: #f0f0f0; /* Yan menü arka plan rengi */
+  width: 250px; /* Yan menü genişliği */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Hafif gölgelendirme */
+}
+
+.mat-list-item {
+  color: black; /* Yan menü öğelerinin metin rengi */
+  padding: 10px 20px; /* Yan menü öğelerinin iç boşluğu */
+  text-decoration: none; /* Yan menü öğelerinde alt çizgiyi kaldır */
+  display: flex; /* İçerik yatay olarak hizalanacak */
+  align-items: center; /* İçerik dikey olarak hizalanacak */
+}
+
+.mat-list-item:hover {
+  background-color: #e0e0e0; /* Fare üzerine gelindiğinde yan menü öğesi arka plan rengi */
+  transition: background-color 0.3s ease; /* Geçiş efekti */
+}
+
+.mat-list-item span {
+  font-weight: bold; /* Yan menü öğelerinin metin kalınlığı */
+  margin-left: 10px; /* Metin ile ikon arasındaki boşluk */
+}
+
+.mat-list-item img {
+  width: 20px; /* İkon genişliği */
+  height: 20px; /* İkon yüksekliği */
+}
+
+.sidebar-title {
+  padding: 20px; /* Başlık iç boşluğu */
+  font-size: 20px; /* Başlık font boyutu */
+  font-weight: bold; /* Başlık font kalınlığı */
+  color: #555555; /* Başlık metin rengi */
+}
+.sidebar {
+  background-color: #222222; /* Yan menü arka plan rengi (koyu gri) */
+  width: 250px; /* Yan menü genişliği */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Hafif gölgelendirme */
+}
+
+.mat-list-item {
+  color: #ffffff; /* Yan menü öğelerinin metin rengi (beyaz) */
+  padding: 10px 20px; /* Yan menü öğelerinin iç boşluğu */
+  text-decoration: none; /* Yan menü öğelerinde alt çizgiyi kaldır */
+  display: flex; /* İçerik yatay olarak hizalanacak */
+  align-items: center; /* İçerik dikey olarak hizalanacak */
+}
+
+.mat-list-item:hover {
+  background-color: #444444; /* Fare üzerine gelindiğinde yan menü öğesi arka plan rengi (daha koyu gri) */
+  transition: background-color 0.3s ease; /* Geçiş efekti */
+}
+
+.mat-list-item span {
+  font-weight: bold; /* Yan menü öğelerinin metin kalınlığı */
+  margin-left: 10px; /* Metin ile ikon arasındaki boşluk */
+}
+
+.mat-list-item img {
+  width: 20px; /* İkon genişliği */
+  height: 20px; /* İkon yüksekliği */
+}
+
+.sidebar-title {
+  padding: 20px; /* Başlık iç boşluğu */
+  font-size: 20px; /* Başlık font boyutu */
+  font-weight: bold; /* Başlık font kalınlığı */
+  color: #ffffff; /* Başlık metin rengi (beyaz) */
+}
