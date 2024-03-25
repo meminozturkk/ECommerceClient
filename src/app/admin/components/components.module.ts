@@ -10,6 +10,7 @@ import { DeleteDirective } from '../../directives/admin/delete.directive';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AuthorizeMenuComponent } from './authorize-menu/authorize-menu.component';
 import { AuthorizeMenuModule } from './authorize-menu/authorize-menu.module';
+import { RoleModule } from './role/role.module';
 
 @NgModule({
   declarations: [],
@@ -22,6 +23,7 @@ import { AuthorizeMenuModule } from './authorize-menu/authorize-menu.module';
     MatSidenavModule,
     FileUploadModule,
     AuthorizeMenuModule,
+    RoleModule,
   ],
 })
 export class ComponentsModule {}

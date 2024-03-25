@@ -64,10 +64,15 @@ export class DeleteDirective {
             (data) => {
               $(td.parentElement).fadeOut(200, () => {
                 this.updateList.emit();
-                this.alertifyService.message('Item deleted succesfully', {
-                  messageType: MessageType.Success,
-                  position: Position.TopRight,
-                });
+                this.alertifyService.message(
+                  `${
+                    this.controller == 'roles' ? 'Rol' : 'Ürün'
+                  } başarıyla silinmiştir.`,
+                  {
+                    messageType: MessageType.Success,
+                    position: Position.TopRight,
+                  }
+                );
               });
             },
             (errorResponse: HttpErrorResponse) => {
