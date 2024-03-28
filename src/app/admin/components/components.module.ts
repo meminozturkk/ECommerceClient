@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AuthorizeMenuComponent } from './authorize-menu/authorize-menu.component';
 import { AuthorizeMenuModule } from './authorize-menu/authorize-menu.module';
 import { RoleModule } from './role/role.module';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [],
@@ -24,6 +25,7 @@ import { RoleModule } from './role/role.module';
     FileUploadModule,
     AuthorizeMenuModule,
     RoleModule,
+    UserModule,
   ],
 })
 export class ComponentsModule {}
