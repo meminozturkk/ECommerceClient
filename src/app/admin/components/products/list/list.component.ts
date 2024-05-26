@@ -38,7 +38,6 @@ export class ListComponent extends BaseComponent implements OnInit {
     'updatedDate',
     'photos',
     'qrcode',
-    'edit',
     'delete',
   ];
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -57,7 +56,6 @@ export class ListComponent extends BaseComponent implements OnInit {
             position: Position.TopRight,
           })
       );
-    debugger;
     this.dataSource = new MatTableDataSource<List_Product>(
       allProducts.products
     );

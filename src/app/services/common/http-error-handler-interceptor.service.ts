@@ -84,14 +84,26 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
               });
             break;
           case HttpStatusCode.InternalServerError:
-            this.toastrService.message(
-              'Sunucuya erişilmiyor!',
-              'Sunucu hatası!',
-              {
-                messageType: ToastrMessageType.Warning,
-                position: ToastrPosition.BottomFullWidht,
-              }
-            );
+            if (error.error && error.error.Message) {
+              debugger;
+              this.toastrService.message(
+                error.error.Message,
+                error.error.Title,
+                {
+                  messageType: ToastrMessageType.Warning,
+                  position: ToastrPosition.BottomFullWidht,
+                }
+              );
+            } else {
+              this.toastrService.message(
+                'Sunucuya erişilmiyor!',
+                'Sunucu hatası!',
+                {
+                  messageType: ToastrMessageType.Warning,
+                  position: ToastrPosition.BottomFullWidht,
+                }
+              );
+            }
             break;
           case HttpStatusCode.BadRequest:
             this.toastrService.message(
@@ -114,14 +126,25 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
             );
             break;
           default:
-            this.toastrService.message(
-              'Beklenmeyen bir hata meydana gelmiştir!',
-              'Hata!',
-              {
-                messageType: ToastrMessageType.Warning,
-                position: ToastrPosition.BottomFullWidht,
-              }
-            );
+            if (error.error && error.error.Message) {
+              this.toastrService.message(
+                error.error.Message,
+                error.error.Title,
+                {
+                  messageType: ToastrMessageType.Warning,
+                  position: ToastrPosition.BottomFullWidht,
+                }
+              );
+            } else {
+              this.toastrService.message(
+                'Beklenmeyen bir hata meydana gelmiştir!',
+                'Hata!',
+                {
+                  messageType: ToastrMessageType.Warning,
+                  position: ToastrPosition.BottomFullWidht,
+                }
+              );
+            }
             break;
         }
         this.spinner.hide(SpinnerType.BallBeat);
