@@ -1,10 +1,37 @@
-<mat-list style="color: black;" role="list">
-    <mat-list-item style="color: black;"role="listitem" routerLink="/admin">Dashboard</mat-list-item>
-    <mat-list-item role="listitem" routerLink="customers">Customer</mat-list-item>
-    <mat-list-item role="listitem" routerLink="orders">Order</mat-list-item>
-    <mat-list-item role="listitem" routerLink="products">Products</mat-list-item>
-    <a mat-list-item role="listitem" routerLink="authorize-menu">Authorize Menu</a>
-    <a mat-list-item role="listitem" routerLink="roles">Roles</a>
-    <a mat-list-item role="listitem" routerLink="users">Users</a>
-    <mat-list-item role="listitem" routerLink="">Show the Site</mat-list-item>
-  </mat-list>
+<div class="sidebar-title">
+  Yönetim Paneli
+</div>
+<mat-list role="list">
+  <mat-list-item role="listitem" routerLink="/admin">
+    <mat-icon>dashboard</mat-icon>
+    <span>Dashboard</span>
+  </mat-list-item>
+  <mat-list-item role="listitem" routerLink="customers">
+    <mat-icon>people</mat-icon>
+    <span>Müşteriler</span>
+  </mat-list-item>
+  <mat-list-item role="listitem" routerLink="orders">
+    <mat-icon>receipt</mat-icon>
+    <span>Şiparişler</span>
+  </mat-list-item>
+  <mat-list-item role="listitem" routerLink="products">
+    <mat-icon>shopping_cart</mat-icon>
+    <span>Ürünler</span>
+  </mat-list-item>
+  <a mat-list-item role="listitem" routerLink="authorize-menu">
+    <mat-icon>security</mat-icon>
+    <span>Yetki Menüsü</span>
+  </a>
+  <a mat-list-item role="listitem" routerLink="roles">
+    <mat-icon>supervisor_account</mat-icon>
+    <span>Roller</span>
+  </a>
+  <a mat-list-item role="listitem" routerLink="users">
+    <mat-icon>account_circle</mat-icon>
+    <span>Kullanıcılar</span>
+  </a>
+  <mat-list-item role="listitem" routerLink="">
+    <mat-icon>web</mat-icon>
+    <span>Siteye Git</span>
+  </mat-list-item>
+</mat-list>

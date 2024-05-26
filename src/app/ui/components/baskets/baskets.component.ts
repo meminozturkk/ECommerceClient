@@ -69,6 +69,7 @@ export class BasketsComponent extends BaseComponent implements OnInit {
       messageType: ToastrMessageType.Info,
       position: ToastrPosition.TopRight,
     });
+
     this.router.navigate(['/']);
   }
 }

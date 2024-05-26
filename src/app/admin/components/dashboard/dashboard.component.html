@@ -1,2 +1,34 @@
-<p>dashboard works!</p>
-<button (click)="m()" >Message</button> <button (click)="d()">Dismiss</button>
+<div class="dashboard">
+    <div class="chart">
+        <h2>Ürün Sayısı</h2>
+        <div class="value">{{ productCount }}</div>
+    </div>
+    <div class="chart">
+        <h2>Toplam Sipariş Sayısı</h2>
+        <div class="value">{{ totalOrderCount }}</div>
+    </div>
+    <div class="chart">
+        <h2>Toplam Kullanıcı Sayısı</h2>
+        <div class="value">{{ totalUserCount }}</div>
+    </div>
+    <div class="chart">
+        <h2>Stok Azalan Ürünler</h2>
+        <div class="value">{{ leastStock }}</div>
+    </div> <div class="chart">
+        <h2>Onaylanmayan Siparişler</h2>
+        <div class="value">{{ totalUnApprovedOrder }}</div>
+    </div>
+</div>
+<div class="best-sellers">
+    <h2>En Çok Satan Ürünler</h2>
+    <ul>
+        <li *ngFor="let product of bestSellers">
+            <div class="product-info">
+                <div class="product-name">{{ product.name }}</div>
+                <div class="product-stock">Stok: {{ product.stock }}</div>
+                <div class="product-sales">Satış: {{ product.sales }}</div>
+            </div>
+        </li>
+    </ul>
+</div>
+

@@ -1,0 +1,54 @@
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Her satırda maksimum 4 chart */
+    gap: 20px; /* Grid hücreleri arasında boşluk */
+    margin: 20px auto;
+    max-width: 1400px;
+}
+
+.chart {
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    grid-auto-rows: max-content; /* Her chart'ın otomatik olarak boyutlanması */
+}
+
+.value {
+    font-size: 24px;
+    margin-top: 10px;
+}
+.best-sellers {
+    margin: 40px auto;
+    max-width: 1400px;
+}
+
+.best-sellers h2 {
+    text-align: center;
+}
+
+.best-sellers ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.best-sellers li {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.product-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.product-name {
+    flex: 1;
+}
+
+.product-stock,
+.product-sales {
+    flex-basis: 100px; /* Aynı genişlikte olmalarını sağlamak için */
+}

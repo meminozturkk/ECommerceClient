@@ -55,6 +55,38 @@ export class ProductService {
       .catch((err: HttpErrorResponse) => errorCallback(err.message));
     return await promiseData;
   }
+
+  async getBestSellers(): Promise<
+    { name: string; stock: number; sales: number }[]
+  > {
+    // Ürün satış bilgilerini al
+    const salesCount = await this.httpClientService
+      .get<{ [id: string]: number }>({
+        controller: 'product',
+        action: 'GetProductSales',
+      })
+      .toPromise();
+    debugger;
+    // Ürün bilgilerini al
+    const products = await this.httpClientService
+      .get<{ totalProductCount: number; products: any[] }>({
+        controller: 'product',
+        queryString: `page=0&size=100`, // Daha büyük bir liste alıyoruz ki tüm ürün bilgilerini alabilelim
+      })
+      .toPromise();
+
+    // En çok satan ürünleri oluştur
+    return products.products
+      .map((product) => {
+        const sales = salesCount.productSales[product.name] || 0;
+        return {
+          name: product.name,
+          stock: product.stock,
+          sales: sales,
+        };
+      })
+      .sort((a, b) => b.sales - a.sales); // Satış sayılarına göre sırala
+  }
   async delete(id: string) {
     const deleted: Observable<any> = this.httpClientService.delete<any>(
       { controller: 'product' },

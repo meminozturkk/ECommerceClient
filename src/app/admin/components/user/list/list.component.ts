@@ -32,7 +32,6 @@ export class ListComponent extends BaseComponent implements OnInit {
     'userName',
     'nameSurname',
     'email',
-    'twoFactorEnabled',
     'role',
     'delete',
   ];

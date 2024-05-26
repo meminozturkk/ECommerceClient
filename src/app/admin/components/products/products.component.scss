@@ -1,24 +1,20 @@
 .example-container {
-  width: 100%; /* Tam genişlik */
-  height: 99%; /* Ekranın tamamını kaplar */
-  display: flex; /* İçerikleri yatay olarak hizalar */
-  overflow-y: hidden;
+  display: flex;
+  height: 100%;
 }
 
 .side-container {
-  width: 20%; /* Kenar çubuğunun genişliği */
-  background-color: #333; /* Kenar çubuğunun arka plan rengi */
-  color: #fff; /* Kenar çubuğunun metin rengi */
-  padding: 20px; /* İç içe geçmiş öğelerden kenara boşluk bırakır */
-  overflow-y: hidden;
+  width: 20%;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
 }
 
 .mat-drawer-content {
-  width: 80%; /* İçerik bölümünün genişliği */
-  padding: 20px; /* İçerikten kenara boşluk bırakır */
-  background-color: #333; /* İçerik arka plan rengi */
-  border: 1px solid #333; /* İçerik kenarlık rengi */
-  overflow-y: hidden; /* Yalnızca ihtiyaç duyulduğunda dikey kaydırma çubuğunu görüntüler */
-  overscroll-behavior: none; /* Kaydırma sonunda sayfanın altına ulaştığında aşırı kaydırmayı engeller */
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #333;
+  overflow-y: auto;
 }
-

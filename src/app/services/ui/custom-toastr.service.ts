@@ -6,14 +6,21 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CustomToastrService {
   constructor(private toastr: ToastrService) {}
-  message(message: string, title: string, toastrOptions: Partial<ToastrOptions>) {
-    this.toastr[toastrOptions.messageType](message,title,{positionClass:toastrOptions.position});
+  message(
+    message: string,
+    title: string,
+    toastrOptions: Partial<ToastrOptions>
+  ) {
+    this.toastr.clear();
+    this.toastr[toastrOptions.messageType](message, title, {
+      positionClass: toastrOptions.position,
+    });
   }
 }
 
-export class ToastrOptions{
-  messageType: ToastrMessageType
-  position:ToastrPosition
+export class ToastrOptions {
+  messageType: ToastrMessageType;
+  position: ToastrPosition;
 }
 
 export enum ToastrMessageType {
@@ -22,13 +29,13 @@ export enum ToastrMessageType {
   Warning = 'warning',
   Error = 'error',
 }
-export enum ToastrPosition{
-TopRight="toast-top-right",
-BottomRight="toast-bottom-right",
-BottomLeft="toast-bottom-left",
-TopLeft="toast-top-left",
-TopFullWidth="toast-top-full-width",
-BottomFullWidht="toast-bottom-full-width",
-TopCenter="toast-top-center",
-BottomCenter="toast-bottom-center"
+export enum ToastrPosition {
+  TopRight = 'toast-top-right',
+  BottomRight = 'toast-bottom-right',
+  BottomLeft = 'toast-bottom-left',
+  TopLeft = 'toast-top-left',
+  TopFullWidth = 'toast-top-full-width',
+  BottomFullWidht = 'toast-bottom-full-width',
+  TopCenter = 'toast-top-center',
+  BottomCenter = 'toast-bottom-center',
 }

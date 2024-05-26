@@ -1,32 +1,17 @@
-<mat-form-field class="create-product">
-    <mat-label>Name</mat-label>
+<div class="create-container">
+  <mat-form-field class="create-product">
+    <mat-label>İsim</mat-label>
     <input #txtName matInput>
   </mat-form-field>
   <mat-form-field class="create-product">
-    <mat-label>Stock</mat-label>
+    <mat-label>Stok</mat-label>
     <input type="number" min="0" value="0" #txtStock matInput>
   </mat-form-field>
   <mat-form-field class="create-product">
-    <mat-label >Price</mat-label>
+    <mat-label>Fiyat</mat-label>
     <input type="number" min="0" value="0" #txtPrice matInput>
   </mat-form-field>
-<!--   
-  <mat-form-field class="create-product">
-    <mat-label>Stock</mat-label>
-    <textarea type="number" min="0" value="0" matInput ></textarea>
-  </mat-form-field>
-  <mat-form-field class="create-product">
-    <mat-label>Price</mat-label>
-    <textarea type="number" min="0" value="0" matInput #txtPrice></textarea>
-  </mat-form-field>
-
-  <mat-form-field class="create-product" >
-    <mat-label>Select</mat-label>
-    <mat-select>
-      <mat-option value="one">First option</mat-option>
-      <mat-option value="two">Second option</mat-option>
-    </mat-select>
-  </mat-form-field> -->
-  <button mat-button color="primary" class="btn" style="color:white" (click)="create(txtName,txtStock,txtPrice)">Create Product</button>
-<h1></h1>
-  <app-file-upload [options]="fileUploadOptions"></app-file-upload> 
+  <button mat-button color="primary" class="btn" (click)="create(txtName, txtStock, txtPrice)">Ürün Oluştur</button>
+  <h1></h1>
+  <app-file-upload [options]="fileUploadOptions"></app-file-upload>
+</div>

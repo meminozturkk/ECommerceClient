@@ -27,7 +27,7 @@ export class ListComponent extends BaseComponent implements OnInit {
     super(spinner);
   }
 
-  displayedColumns: string[] = ['name', 'edit', 'delete'];
+  displayedColumns: string[] = ['name', 'delete'];
   dataSource: MatTableDataSource<List_Role> = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

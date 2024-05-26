@@ -1,31 +1,37 @@
-/* Tablo stilleri */
-.mat-elevation-z8 {
-  border: 1px solid #333; /* Kenarlık rengi */
-  border-radius: 8px; /* Köşe yuvarlaklığı */
-  overflow: hidden; /* Taşan içeriği gizle */
-  background-color: #444; /* Arka plan rengi */
-  color: #fff; /* Metin rengi */
+/* Ana tablo kabı */
+.custom-table-container {
+  border: 1px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #444;
+  color: #fff;
+  padding: 20px;
 }
 
-/* Tablo başlık hücrelerinin stilleri */
-.mat-table th {
-  background-color: #555; /* Arka plan rengi */
-  font-weight: bold; /* Kalın metin */
+/* Materyal tablosu */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-/* Tablo hücrelerinin arka plan rengi */
-.mat-table td {
-  background-color: #333; /* Arka plan rengi */
-  padding: 12px 16px; /* İç boşluk */
-  text-align: left; /* Metin hücrenin soluna hizala */
+.custom-table th, .custom-table td {
+  padding: 12px 16px;
+  text-align: left;
 }
 
-/* Tablo satırları üzerine gelindiğinde arka plan rengi değişimi */
-.mat-table tr:hover {
-  background-color: #666; /* Fare üzerine gelindiğinde satırın arka plan rengi */
+.custom-table th {
+  background-color: #555;
+  font-weight: bold;
 }
 
-/* Sütun genişliklerini belirle */
+.custom-table td {
+  background-color: #333;
+}
+
+.custom-table tr:hover {
+  background-color: #666;
+}
+
 .mat-column-orderCode,
 .mat-column-userName,
 .mat-column-totalPrice,
@@ -33,11 +39,34 @@
 .mat-column-completed,
 .mat-column-viewdetail,
 .mat-column-delete {
-  width: 120px; /* Sabit genişlik */
+  width: 120px;
 }
 
-/* Simgelerin stil düzenlemeleri */
-.mat-icon {
-  vertical-align: middle; /* Simgeleri dikey hizala */
-  margin-right: 5px; /* Sağ boşluk */
+/* Simge stil düzenlemeleri */
+.icon {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.icon:hover {
+  transform: scale(1.1);
+}
+
+/* Paginator stilleri */
+.mat-paginator {
+  background-color: #333;
+  color: #fff;
+  border-top: 1px solid #444;
+}
+
+.mat-paginator .mat-button {
+  color: #fff;
+}
+
+.mat-paginator .mat-select {
+  color: #fff;
+}
+
+.mat-paginator .mat-paginator-icon {
+  color: #fff;
 }

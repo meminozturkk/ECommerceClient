@@ -1,70 +1,49 @@
+.main-container {
+  display: flex;
+  height: 100vh;
+}
+
 .sidebar {
-  background-color: #f0f0f0; /* Yan menü arka plan rengi */
-  width: 250px; /* Yan menü genişliği */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Hafif gölgelendirme */
+  width: 250px;
+  background-color: #333;
+  color: #fff;
 }
 
-.mat-list-item {
-  color: black; /* Yan menü öğelerinin metin rengi */
-  padding: 10px 20px; /* Yan menü öğelerinin iç boşluğu */
-  text-decoration: none; /* Yan menü öğelerinde alt çizgiyi kaldır */
-  display: flex; /* İçerik yatay olarak hizalanacak */
-  align-items: center; /* İçerik dikey olarak hizalanacak */
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+  overflow-y: auto;
 }
 
-.mat-list-item:hover {
-  background-color: #e0e0e0; /* Fare üzerine gelindiğinde yan menü öğesi arka plan rengi */
-  transition: background-color 0.3s ease; /* Geçiş efekti */
+app-header, app-footer {
+  background-color: #444;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
 }
-
-.mat-list-item span {
-  font-weight: bold; /* Yan menü öğelerinin metin kalınlığı */
-  margin-left: 10px; /* Metin ile ikon arasındaki boşluk */
+.sidebar-title{
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+  overflow-y: auto;
 }
-
-.mat-list-item img {
-  width: 20px; /* İkon genişliği */
-  height: 20px; /* İkon yüksekliği */
-}
-
 .sidebar-title {
-  padding: 20px; /* Başlık iç boşluğu */
-  font-size: 20px; /* Başlık font boyutu */
-  font-weight: bold; /* Başlık font kalınlığı */
-  color: #555555; /* Başlık metin rengi */
-}
-.sidebar {
-  background-color: #222222; /* Yan menü arka plan rengi (koyu gri) */
-  width: 250px; /* Yan menü genişliği */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Hafif gölgelendirme */
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+  overflow-y: auto;
+  font-size: 24px; /* Yönetim paneli yazısını büyütmek için font boyutunu ayarla */
+  display: flex; /* Yönetim paneli yazısı ve simgeleri yatay hizalamak için flex kullan */
+  align-items: center; /* Dikey hizalamayı yap */
 }
 
-.mat-list-item {
-  color: #ffffff; /* Yan menü öğelerinin metin rengi (beyaz) */
-  padding: 10px 20px; /* Yan menü öğelerinin iç boşluğu */
-  text-decoration: none; /* Yan menü öğelerinde alt çizgiyi kaldır */
-  display: flex; /* İçerik yatay olarak hizalanacak */
-  align-items: center; /* İçerik dikey olarak hizalanacak */
+.sidebar-title mat-icon {
+  margin-top: 4px; /* Simgeleri biraz yukarıda duracak şekilde ayarla */
 }
-
-.mat-list-item:hover {
-  background-color: #444444; /* Fare üzerine gelindiğinde yan menü öğesi arka plan rengi (daha koyu gri) */
-  transition: background-color 0.3s ease; /* Geçiş efekti */
-}
-
-.mat-list-item span {
-  font-weight: bold; /* Yan menü öğelerinin metin kalınlığı */
-  margin-left: 10px; /* Metin ile ikon arasındaki boşluk */
-}
-
-.mat-list-item img {
-  width: 20px; /* İkon genişliği */
-  height: 20px; /* İkon yüksekliği */
-}
-
-.sidebar-title {
-  padding: 20px; /* Başlık iç boşluğu */
-  font-size: 20px; /* Başlık font boyutu */
-  font-weight: bold; /* Başlık font kalınlığı */
-  color: #ffffff; /* Başlık metin rengi (beyaz) */
+mat-icon {
+  vertical-align: middle; /* Simgeleri dikey hizalama yap */
+  margin-right: 8px; /* Sağ boşluk ayarla */
 }

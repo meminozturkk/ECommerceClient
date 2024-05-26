@@ -9,6 +9,7 @@ import {
   SocialUser,
 } from '@abacritt/angularx-social-login';
 import { UserAuthService } from 'src/app/services/common/models/user-auth.service';
+import { HomeComponent } from '../home/home.component';
 
 @Component({
   selector: 'app-login',
@@ -55,6 +56,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
       this.activatedRoute.queryParams.subscribe((params) => {
         const returnUrl: string = params['returnUrl'];
         if (returnUrl) this.router.navigate([returnUrl]);
+        else this.router.navigate(['/']);
       });
       this.hideSpinner(SpinnerType.BallBeat);
     });

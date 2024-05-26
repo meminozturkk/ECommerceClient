@@ -71,4 +71,13 @@ export class OrderService {
 
     await firstValueFrom(observable);
   }
+  async deleteOrder(id: string) {
+    const observable: Observable<any> = this.httpCLientService.delete<any>(
+      {
+        controller: 'orders',
+        action: 'delete',
+      },
+      id
+    );
+  }
 }
