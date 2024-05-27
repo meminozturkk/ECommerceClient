@@ -1,0 +1,16 @@
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .product-create {
+    flex: 1;
+    min-width: 200px; /* Minimum genişlik ayarı */
+  }
+  
+  @media (max-width: 600px) {
+    .form-container {
+      flex-direction: column;
+    }
+  }

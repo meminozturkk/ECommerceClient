@@ -40,6 +40,8 @@ export class QrcodeReadingDialogComponent
 
   @ViewChild('scanner', { static: true }) scanner: NgxScannerQrcodeComponent;
   @ViewChild('txtStock', { static: true }) txtStock: ElementRef;
+  @ViewChild('txtName', { static: true }) txtName: ElementRef;
+  @ViewChild('txtPrice', { static: true }) txtPrice: ElementRef;
 
   ngOnInit(): void {
     this.scanner.start();
@@ -58,24 +60,52 @@ export class QrcodeReadingDialogComponent
       const jsonData = JSON.parse(data);
       const stockValue = (this.txtStock.nativeElement as HTMLInputElement)
         .value;
+      const nameValue = (this.txtName.nativeElement as HTMLInputElement).value;
+      const priceValue = (this.txtPrice.nativeElement as HTMLInputElement)
+        .value;
+      const updates: any = {};
+      updates.id = jsonData.Id;
+      if (nameValue) {
+        updates.Name = nameValue;
+      }
+      if (stockValue) {
+        updates.Stock = parseInt(stockValue);
+      }
+      if (priceValue) {
+        updates.Price = parseFloat(priceValue);
+      }
 
-      this.productService.updateStockQrCodeToProduct(
-        jsonData.Id,
-        parseInt(stockValue),
-        () => {
-          $('#btnClose').click();
-          this.toastrService.message(
-            `${jsonData.Name} ürünün stok bilgisi '${stockValue}' olarak güncellenmiştir.`,
-            'Stok Başarıyla Güncellendi',
-            {
-              messageType: ToastrMessageType.Success,
-              position: ToastrPosition.TopRight,
-            }
-          );
-
-          this.spinner.hide(SpinnerType.BallBeat);
-        }
-      );
+      console.log(updates);
+      if (Object.keys(updates).length > 0) {
+        this.productService.updateStockQrCodeToProduct(
+          updates.id,
+          updates.Stock,
+          updates.Name,
+          updates.Price,
+          () => {
+            $('#btnClose').click();
+            this.toastrService.message(
+              `${jsonData.Name} ürün bilgileri güncellenmiştir.`,
+              'Ürün Başarıyla Güncellendi',
+              {
+                messageType: ToastrMessageType.Success,
+                position: ToastrPosition.TopRight,
+              }
+            );
+            this.spinner.hide(SpinnerType.BallBeat);
+          }
+        );
+      } else {
+        this.toastrService.message(
+          `Güncelleme için en az bir bilgi girilmelidir.`,
+          'Güncelleme Başarısız',
+          {
+            messageType: ToastrMessageType.Warning,
+            position: ToastrPosition.TopRight,
+          }
+        );
+        this.spinner.hide(SpinnerType.BallBeat);
+      }
     }
   }
 }

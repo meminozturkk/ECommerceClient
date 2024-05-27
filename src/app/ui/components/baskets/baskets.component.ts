@@ -12,6 +12,7 @@ import {
 } from 'src/app/services/ui/custom-toastr.service';
 import { Create_Order } from 'src/app/contracts/create_order';
 import { OrderService } from 'src/app/services/common/models/order.service';
+import { ProductService } from 'src/app/services/common/models/product.service';
 
 declare var $: any;
 
@@ -26,15 +27,17 @@ export class BasketsComponent extends BaseComponent implements OnInit {
     private basketService: BasketService,
     private orderService: OrderService,
     private toastrService: CustomToastrService,
-    private router: Router
+    private router: Router,
+    private productService: ProductService
   ) {
     super(spinner);
   }
   basketItems: List_Basket_Item[];
-
+  basketItemsWithStock: any[];
   async ngOnInit(): Promise<void> {
     this.showSpinner(SpinnerType.BallBeat);
     this.basketItems = await this.basketService.get();
+    this.getProductStock();
     this.hideSpinner(SpinnerType.BallBeat);
   }
 
@@ -71,5 +74,19 @@ export class BasketsComponent extends BaseComponent implements OnInit {
     });
 
     this.router.navigate(['/']);
+  }
+  async getProductStock() {
+    debugger;
+    const productList = await this.productService.list();
+    this.basketItemsWithStock = this.basketItems.map((basketItem) => {
+      const product = productList.products.find(
+        (p) => p.name == basketItem.name
+      );
+      return {
+        ...basketItem,
+        stock: product ? product.stock : 0,
+      };
+    });
+    console.log(this.basketItemsWithStock);
   }
 }

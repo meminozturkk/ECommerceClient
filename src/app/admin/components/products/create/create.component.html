@@ -1,15 +1,15 @@
 <div class="create-container">
   <mat-form-field class="create-product">
     <mat-label>İsim</mat-label>
-    <input #txtName matInput>
+    <input #txtName matInput required >
   </mat-form-field>
   <mat-form-field class="create-product">
     <mat-label>Stok</mat-label>
-    <input type="number" min="0" value="0" #txtStock matInput>
+    <input type="number" min="1" value="0" #txtStock matInput>
   </mat-form-field>
   <mat-form-field class="create-product">
     <mat-label>Fiyat</mat-label>
-    <input type="number" min="0" value="0" #txtPrice matInput>
+    <input type="number" min="1" value="0" #txtPrice matInput>
   </mat-form-field>
   <button mat-button color="primary" class="btn" (click)="create(txtName, txtStock, txtPrice)">Ürün Oluştur</button>
   <h1></h1>
