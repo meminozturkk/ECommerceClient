@@ -120,6 +120,9 @@
       grid-template-columns: repeat(4, 1fr); /* On large devices and up, display cards in four columns */
     }
   }
-
-  
-  
+  .btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    margin-right: 3.5rem;
+}

@@ -18,13 +18,21 @@ export class AuthService {
     } catch {
       expired = true;
     }
+    debugger;
+    const decodedToken = this.jwtHelper.decodeToken(token);
 
     _isAuthenticated = token != null && !expired;
   }
-
+  setAdminStatus(isAdmin: boolean) {
+    _isAdmin = isAdmin;
+  }
   get isAuthenticated(): boolean {
     return _isAuthenticated;
+  }
+  get isAdminUser(): boolean {
+    return _isAdmin;
   }
 }
 
 export let _isAuthenticated: boolean;
+export let _isAdmin: boolean;

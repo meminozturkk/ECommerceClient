@@ -32,7 +32,7 @@
             </ul>
           </li> -->
           <li class="nav-item">
-            <a class="nav-link" routerLink="admin" *ngIf="authService.isAuthenticated" >Yönetim Paneli</a>
+            <a class="nav-link" routerLink="admin" *ngIf="authService.isAuthenticated && authService.isAdminUser" >Yönetim Paneli</a>
           </li>
           
           <!-- <li class="nav-item">

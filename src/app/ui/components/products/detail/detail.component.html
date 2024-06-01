@@ -1,0 +1,36 @@
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <div id="productImageCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div *ngFor="let image of product.productImageFile; let i = index" [ngClass]="{'carousel-item': true, 'active': i === 0}">
+              <img [src]="baseUrl.url + '/' + image.path" class="d-block w-100" alt="Product image">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#productImageCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#productImageCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-6">    
+        <h2>{{ product.name }}</h2>
+        <div class="d-flex justify-content-between">
+            <p class="ms-auto text-end"><strong>Kargo Süresi:</strong> 1 Gün İçerisinde Kargo</p>
+          </div>
+        <p><strong>Ücret:</strong> {{ product.price | currency:'TRY' }}</p>
+        <p><strong>Stok:</strong> {{ product.stock }}</p>
+        <br>
+        <hr class="new">
+        <p>{{ product.name }}</p>   
+        <hr class="new"> 
+        <div class="btn-class d-flex justify-content-start align-items-center">          
+          <button class="btn btn-primary" (click)="addToBasket(product)">Sepete Ekle</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,26 @@
+.container {
+    margin-top: 50px;
+  }
+  
+  .carousel-item img {
+    max-height: 400px;
+    object-fit: cover;
+  }
+  
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+  }
+  
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 5%;
+  }
+  .btn-class{
+    padding-top: 7rem;
+    
+  }
+ .new{
+    border: 1.5px solid darkblue;
+  }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BaseUrl } from '../../../../contracts/base_url';
 import { List_Product } from '../../../../contracts/list_product';
 import { FileService } from '../../../../services/common/models/file.service';
@@ -26,7 +26,8 @@ export class ListComponent extends BaseComponent implements OnInit {
     private fileService: FileService,
     private basketService: BasketService,
     spinner: NgxSpinnerService,
-    private customToastrService: CustomToastrService
+    private customToastrService: CustomToastrService,
+    private router: Router
   ) {
     super(spinner);
   }
@@ -116,5 +117,8 @@ export class ListComponent extends BaseComponent implements OnInit {
         position: ToastrPosition.TopRight,
       }
     );
+  }
+  goToProductDetail(productId: string): void {
+    this.router.navigate(['/products/detail', productId]);
   }
 }

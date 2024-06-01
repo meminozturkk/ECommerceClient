@@ -57,7 +57,7 @@ export class ProductService {
   }
 
   async getBestSellers(): Promise<
-    { name: string; stock: number; sales: number }[]
+    { name: string; stock: number; sales: number; path: string }[]
   > {
     // Ürün satış bilgilerini al
     const salesCount = await this.httpClientService
@@ -69,9 +69,9 @@ export class ProductService {
     debugger;
     // Ürün bilgilerini al
     const products = await this.httpClientService
-      .get<{ totalProductCount: number; products: any[] }>({
+      .get<{ totalProductCount: number; products: List_Product[] }>({
         controller: 'product',
-        queryString: `page=0&size=100`, // Daha büyük bir liste alıyoruz ki tüm ürün bilgilerini alabilelim
+        queryString: `page=0&size=10`, // Daha büyük bir liste alıyoruz ki tüm ürün bilgilerini alabilelim
       })
       .toPromise();
 
@@ -80,9 +80,14 @@ export class ProductService {
       .map((product) => {
         const sales = salesCount.productSales[product.name] || 0;
         return {
+          id: product.id,
           name: product.name,
           stock: product.stock,
           sales: sales,
+          path:
+            product.productImageFile.length > 0
+              ? product.productImageFile[0].path
+              : '',
         };
       })
       .sort((a, b) => b.sales - a.sales); // Satış sayılarına göre sırala
@@ -159,5 +164,19 @@ export class ProductService {
 
     await firstValueFrom(observable);
     successCallBack();
+  }
+  async getById(id: string): Promise<{
+    product: List_Product;
+  }> {
+    const product = await this.httpClientService
+      .get<{ product: List_Product }>(
+        {
+          controller: 'product',
+        },
+        id
+      )
+      .toPromise();
+    console.log(product);
+    return product;
   }
 }

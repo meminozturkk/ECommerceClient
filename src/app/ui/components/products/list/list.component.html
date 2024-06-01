@@ -7,6 +7,8 @@
       <h5 class="product-title">{{ product.name }}</h5>
       <p class="product-info">Fiyat: {{ product.price | currency:'TRY' }}</p>
       <p class="product-info">Stok: {{ product.stock }}</p>
+      <button type="button" class="btn btn-primary" (click)="goToProductDetail(product.id)">Ürün Detay</button>
+
       <button class="btn btn-success" (click)="addToBasket(product)">Sepete Ekle</button>
     </div>
   </div>

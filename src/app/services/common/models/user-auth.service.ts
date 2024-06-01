@@ -9,6 +9,7 @@ import {
 } from '../../ui/custom-toastr.service';
 import { HttpClientService } from '../http-client.service';
 import { TokenResponse } from 'src/app/contracts/tokenResponse';
+import { AuthService } from '../auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,8 @@ import { TokenResponse } from 'src/app/contracts/tokenResponse';
 export class UserAuthService {
   constructor(
     private httpClientService: HttpClientService,
-    private toastrService: CustomToastrService
+    private toastrService: CustomToastrService,
+    private authService: AuthService
   ) {}
 
   async login(
@@ -40,6 +42,10 @@ export class UserAuthService {
     if (tokenResponse) {
       localStorage.setItem('accessToken', tokenResponse.token.accessToken);
       localStorage.setItem('refreshToken', tokenResponse.token.refreshToken);
+      debugger;
+      this.authService.setAdminStatus(tokenResponse.isAdmin);
+      this.authService.identityCheck();
+
       this.toastrService.message(
         'Kullanıcı girişi başarıyla sağlanmıştır.',
         'Giriş Başarılı',

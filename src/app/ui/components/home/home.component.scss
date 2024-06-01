@@ -1,37 +1,74 @@
-/* Styles for the sidebar */
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100; /* Behind the navbar */
-  padding: 48px 0 0; /* Height of navbar */
+.carousel {
+  margin-bottom: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+.carousel-inner img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 500px;
 }
 
-.sidebar-sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0; /* Height of navbar */
-  height: calc(100vh - 48px);
-  padding-top: .5rem;
-  overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+  color: black !important
 }
 
-.sidebar .nav-link {
-  font-weight: 500;
-  color: #333;
+.titleforH2{
+  margin: 1rem 5%;
+  font-weight: bold;
+}
+.carousel-control-prev-icon{
+  color: black;
+}
+.card-img-top{
+  height: 250px !important;
+
+}
+.card-title{
+  font-weight: bold;
+  font-size: larger;
+}
+.card-body{
+  background-color: bisque;
+}
+.footer {
+  background-color: #2F4F4F;
+  color: white;
+  padding: 20px;
+  text-align: center;
 }
 
-.sidebar .nav-link .feather {
-  margin-right: 4px;
-  color: #999;
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.sidebar .nav-link.active {
-  color: #007bff;
+.footer-links {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
-.card-header {
-  background-color: #f8f9fa;
+.footer-links li {
+  display: inline;
+  margin-right: 20px;
+}
+
+.footer-links li:last-child {
+  margin-right: 0;
+}
+
+.footer-links li a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-links li a:hover {
+  text-decoration: underline;
 }
