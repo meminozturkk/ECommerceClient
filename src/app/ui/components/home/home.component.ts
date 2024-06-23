@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { BaseUrl } from 'src/app/contracts/base_url';
@@ -15,7 +16,8 @@ export class HomeComponent extends BaseComponent implements OnInit {
   constructor(
     spinner: NgxSpinnerService,
     private productService: ProductService,
-    private fileService: FileService
+    private fileService: FileService,
+    private router: Router
   ) {
     super(spinner);
   }
@@ -49,5 +51,8 @@ export class HomeComponent extends BaseComponent implements OnInit {
   async getBestSeller() {
     this.bestSellers = await this.productService.getBestSellers();
     console.log(this.bestSellers);
+  }
+  goToProductDetail(productId: string): void {
+    this.router.navigate(['/products/detail', productId]);
   }
 }

@@ -7,13 +7,13 @@
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="assets/slider1.jpg" class="d-block w-50" alt="...">
+          <img src="assets/slider1.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="assets/completed.png" class="d-block w-50" alt="...">
+          <img src="assets/banner.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="assets/default.webp" class="d-block w-50" alt="...">
+          <img src="assets/default.webp" class="d-block w-100" alt="...">
 
         </div>
       </div>
@@ -38,7 +38,7 @@
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="d-flex justify-content-around">
-                        <div *ngFor="let bestseller of bestSellers.slice(0,3)"class="card" style="width: 18rem;">
+                        <div *ngFor="let bestseller of bestSellers.slice(0,3)"class="card" style="width: 18rem;" (click)="goToProductDetail(bestseller.id)">
                             <img [src]="bestseller.path ? (baseUrl.url + '/' + bestseller.path) : 'assets/default.webp'" alt="Product Image" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">{{bestseller.name}}</h5>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="carousel-item">
                     <div class="d-flex justify-content-around">
-                        <div *ngFor="let bestseller of bestSellers.slice(3,6)" class="card" style="width: 18rem;">
+                        <div *ngFor="let bestseller of bestSellers.slice(3,6)" class="card" style="width: 18rem;" (click)="goToProductDetail(bestseller.id)">
                             <img [src]="bestseller.path ? (baseUrl.url + '/' + bestseller.path) : 'assets/default.webp'" alt="Product Image" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">{{bestseller.name}}</h5>
@@ -83,7 +83,7 @@
             <div class="carousel-inner">
                 <div  class="carousel-item active">
                     <div class="d-flex justify-content-around">
-                        <div *ngFor="let item of productList.slice(0,3)" class="card" style="width: 18rem;">
+                        <div *ngFor="let item of productList.slice(0,3)" class="card" style="width: 18rem;"(click)="goToProductDetail(item.id)">
                             <img [src]="item.productImageFile.length ? (baseUrl.url + '/' + item.productImageFile[0].path) : 'assets/default.webp'" alt="Product Image" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">{{item.name}}</h5>
@@ -93,7 +93,7 @@
                 </div>
                 <div class="carousel-item">
                     <div class="d-flex justify-content-around">
-                        <div *ngFor="let item of productList.slice(3,6)" class="card" style="width: 18rem;">
+                        <div *ngFor="let item of productList.slice(3,6)" class="card" style="width: 18rem;" (click)="goToProductDetail(item.id)">
                             <img [src]="item.productImageFile.length ? (baseUrl.url + '/' + item.productImageFile[0].path) : 'assets/default.webp'" alt="Product Image" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">{{item.name}}</h5>
