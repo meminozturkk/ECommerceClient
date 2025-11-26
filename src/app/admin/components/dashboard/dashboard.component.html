@@ -1,34 +1,117 @@
-<div class="dashboard">
-    <div class="chart">
-        <h2>Ürün Sayısı</h2>
-        <div class="value">{{ productCount }}</div>
-    </div>
-    <div class="chart">
-        <h2>Toplam Sipariş Sayısı</h2>
-        <div class="value">{{ totalOrderCount }}</div>
-    </div>
-    <div class="chart">
-        <h2>Toplam Kullanıcı Sayısı</h2>
-        <div class="value">{{ totalUserCount }}</div>
-    </div>
-    <div class="chart">
-        <h2>Stok Azalan Ürünler</h2>
-        <div class="value">{{ leastStock }}</div>
-    </div> <div class="chart">
-        <h2>Onaylanmayan Siparişler</h2>
-        <div class="value">{{ totalUnApprovedOrder }}</div>
-    </div>
-</div>
-<div class="best-sellers">
-    <h2>En Çok Satan Ürünler</h2>
-    <ul>
-        <li *ngFor="let product of bestSellers">
-            <div class="product-info">
-                <div class="product-name">{{ product.name }}</div>
-                <div class="product-stock">Stok: {{ product.stock }}</div>
-                <div class="product-sales">Satış: {{ product.sales }}</div>
-            </div>
-        </li>
-    </ul>
-</div>
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>Dashboard</h1>
+    <p>Genel Bakış ve İstatistikler</p>
+  </div>
 
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <h3>Ürün Sayısı</h3>
+        <div class="stat-value">{{ productCount }}</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <h3>Toplam Sipariş</h3>
+        <div class="stat-value">{{ totalOrderCount }}</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <h3>Toplam Kullanıcı</h3>
+        <div class="stat-value">{{ totalUserCount }}</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <h3>Stok Azalan Ürünler</h3>
+        <div class="stat-value">{{ leastStock }}</div>
+      </div>
+    </div>
+
+    <div class="stat-card warning">
+      <div class="stat-icon" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <h3>Onaylanmayan Siparişler</h3>
+        <div class="stat-value">{{ totalUnApprovedOrder }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="best-sellers-section">
+    <div class="section-header">
+      <h2>En Çok Satan Ürünler</h2>
+      <p>Popüler ürünlerin satış istatistikleri</p>
+    </div>
+    
+    <div class="best-sellers-grid" *ngIf="bestSellers && bestSellers.length > 0">
+      <div class="seller-card" *ngFor="let product of bestSellers">
+        <div class="seller-rank">
+          <span class="rank-badge">#{{ bestSellers.indexOf(product) + 1 }}</span>
+        </div>
+        <div class="seller-info">
+          <h4 class="seller-name">{{ product.name }}</h4>
+          <div class="seller-stats">
+            <div class="stat-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 9l6 6 6-6"></path>
+              </svg>
+              <span>Stok: {{ product.stock }}</span>
+            </div>
+            <div class="stat-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              </svg>
+              <span>Satış: {{ product.sales }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="!bestSellers || bestSellers.length === 0">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+      </svg>
+      <p>Henüz satış verisi bulunmuyor</p>
+    </div>
+  </div>
+</div>

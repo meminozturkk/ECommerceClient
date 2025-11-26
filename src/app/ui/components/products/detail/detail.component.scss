@@ -125,6 +125,12 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      display: inline-block;
+      white-space: nowrap;
+      word-break: keep-all;
+      overflow: visible;
+      width: 100%;
+      line-height: 1.2;
 
       @media (max-width: 768px) {
         font-size: 2rem;
@@ -242,6 +248,42 @@
         width: 20px;
         height: 20px;
       }
+    }
+  }
+}
+
+.product-not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 3rem;
+
+  .not-found-content {
+    text-align: center;
+    padding: 3rem;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+    svg {
+      width: 64px;
+      height: 64px;
+      color: #6366f1;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #64748b;
+      font-size: 1rem;
+      margin: 0;
     }
   }
 }

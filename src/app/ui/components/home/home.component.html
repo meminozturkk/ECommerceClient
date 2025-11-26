@@ -3,14 +3,17 @@
   <section class="hero-section">
     <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
       <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
           <div class="carousel-image-wrapper">
-            <img src="assets/slider1.jpg" class="d-block w-100" alt="Slide 1">
+            <img src="assets/pngwing.com.png" class="d-block w-100" alt="Slide 1">
             <div class="carousel-overlay"></div>
           </div>
         </div>
@@ -27,11 +30,13 @@
           </div>
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
@@ -45,14 +50,17 @@
         <h2 class="section-title">Çok Satanlar</h2>
         <p class="section-subtitle">En popüler ürünlerimizi keşfedin</p>
       </div>
-      
+
       <div id="carouselExampleControls1" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
             <div class="products-grid">
-              <div *ngFor="let bestseller of bestSellers.slice(0,3)" class="product-card-modern" (click)="goToProductDetail(bestseller.id)">
+              <div *ngFor="let bestseller of bestSellers.slice(0,3)" class="product-card-modern"
+                (click)="goToProductDetail(bestseller.id)">
                 <div class="product-image-wrapper">
-                  <img [src]="bestseller.path ? (baseUrl.url + '/' + bestseller.path) : 'assets/default.webp'" alt="Product Image" class="product-image">
+                  <img
+                    [src]="bestseller.path ? (baseUrl?.url ? (baseUrl.url + '/' + bestseller.path) : bestseller.path) : 'assets/product.png'"
+                    alt="Product Image" class="product-image">
                   <div class="product-overlay">
                     <button class="btn-quick-view">Hızlı Görünüm</button>
                   </div>
@@ -66,9 +74,12 @@
           </div>
           <div class="carousel-item">
             <div class="products-grid">
-              <div *ngFor="let bestseller of bestSellers.slice(3,6)" class="product-card-modern" (click)="goToProductDetail(bestseller.id)">
+              <div *ngFor="let bestseller of bestSellers.slice(3,6)" class="product-card-modern"
+                (click)="goToProductDetail(bestseller.id)">
                 <div class="product-image-wrapper">
-                  <img [src]="bestseller.path ? (baseUrl.url + '/' + bestseller.path) : 'assets/default.webp'" alt="Product Image" class="product-image">
+                  <img
+                    [src]="bestseller.path ? (baseUrl?.url ? (baseUrl.url + '/' + bestseller.path) : bestseller.path) : 'assets/product.png'"
+                    alt="Product Image" class="product-image">
                   <div class="product-overlay">
                     <button class="btn-quick-view">Hızlı Görünüm</button>
                   </div>
@@ -81,11 +92,13 @@
             </div>
           </div>
         </div>
-        <button class="carousel-control-prev custom-control" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="prev">
+        <button class="carousel-control-prev custom-control" type="button" data-bs-target="#carouselExampleControls1"
+          data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next custom-control" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="next">
+        <button class="carousel-control-next custom-control" type="button" data-bs-target="#carouselExampleControls1"
+          data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
@@ -100,14 +113,17 @@
         <h2 class="section-title">Yeni Ürünler</h2>
         <p class="section-subtitle">Yeni eklenen ürünlerimizi inceleyin</p>
       </div>
-      
+
       <div id="carouselExampleControls2" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
             <div class="products-grid">
-              <div *ngFor="let item of productList.slice(0,3)" class="product-card-modern" (click)="goToProductDetail(item.id)">
+              <div *ngFor="let item of productList.slice(0,3)" class="product-card-modern"
+                (click)="goToProductDetail(item.id)">
                 <div class="product-image-wrapper">
-                  <img [src]="item.productImageFile.length ? (baseUrl.url + '/' + item.productImageFile[0].path) : 'assets/default.webp'" alt="Product Image" class="product-image">
+                  <img
+                    [src]="item.productImageFile?.length ? (baseUrl?.url ? (baseUrl.url + '/' + item.productImageFile[0].path) : item.productImageFile[0].path) : (item.path || 'assets/product.png')"
+                    alt="Product Image" class="product-image">
                   <div class="product-overlay">
                     <button class="btn-quick-view">Hızlı Görünüm</button>
                   </div>
@@ -121,9 +137,12 @@
           </div>
           <div class="carousel-item">
             <div class="products-grid">
-              <div *ngFor="let item of productList.slice(3,6)" class="product-card-modern" (click)="goToProductDetail(item.id)">
+              <div *ngFor="let item of productList.slice(3,6)" class="product-card-modern"
+                (click)="goToProductDetail(item.id)">
                 <div class="product-image-wrapper">
-                  <img [src]="item.productImageFile.length ? (baseUrl.url + '/' + item.productImageFile[0].path) : 'assets/default.webp'" alt="Product Image" class="product-image">
+                  <img
+                    [src]="item.productImageFile?.length ? (baseUrl?.url ? (baseUrl.url + '/' + item.productImageFile[0].path) : item.productImageFile[0].path) : (item.path || 'assets/product.png')"
+                    alt="Product Image" class="product-image">
                   <div class="product-overlay">
                     <button class="btn-quick-view">Hızlı Görünüm</button>
                   </div>
@@ -136,11 +155,13 @@
             </div>
           </div>
         </div>
-        <button class="carousel-control-prev custom-control" type="button" data-bs-target="#carouselExampleControls2" data-bs-slide="prev">
+        <button class="carousel-control-prev custom-control" type="button" data-bs-target="#carouselExampleControls2"
+          data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next custom-control" type="button" data-bs-target="#carouselExampleControls2" data-bs-slide="next">
+        <button class="carousel-control-next custom-control" type="button" data-bs-target="#carouselExampleControls2"
+          data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>

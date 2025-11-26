@@ -1,10 +1,11 @@
-<app-header></app-header>
-<mat-drawer-container class="admin-container">
-  <mat-drawer class="mat-drawer" mode="side" opened>
+<div class="admin-layout">
+  <app-header></app-header>
+  <div class="admin-container">
     <app-sidebar class="sidebar"></app-sidebar>
-  </mat-drawer>
-  <mat-drawer-content class="mat-drawer-content">
-    <router-outlet></router-outlet>
-  </mat-drawer-content>
-</mat-drawer-container>
-<app-footer></app-footer>
+    <main class="main-content">
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </div>
+</div>

@@ -10,6 +10,7 @@ import {
 import { HttpClientService } from '../http-client.service';
 import { TokenResponse } from 'src/app/contracts/tokenResponse';
 import { AuthService } from '../auth.service';
+import { MockDataService } from './mock-data.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,8 @@ export class UserAuthService {
   constructor(
     private httpClientService: HttpClientService,
     private toastrService: CustomToastrService,
-    private authService: AuthService
+    private authService: AuthService,
+    private mockDataService: MockDataService
   ) {}
 
   async login(
@@ -26,37 +28,71 @@ export class UserAuthService {
     password: string,
     callBackFunction?: () => void
   ): Promise<any> {
-    const observable: Observable<any | TokenResponse> =
-      this.httpClientService.post<any | TokenResponse>(
-        {
-          controller: 'auth',
-          action: 'login',
-        },
-        { userNameOrEmail, password }
+    try {
+      const observable: Observable<any | TokenResponse> =
+        this.httpClientService.post<any | TokenResponse>(
+          {
+            controller: 'auth',
+            action: 'login',
+          },
+          { userNameOrEmail, password }
+        );
+
+      const tokenResponse: TokenResponse = (await firstValueFrom(
+        observable
+      )) as TokenResponse;
+
+      if (tokenResponse) {
+        localStorage.setItem('accessToken', tokenResponse.token.accessToken);
+        localStorage.setItem('refreshToken', tokenResponse.token.refreshToken);
+        this.authService.setAdminStatus(tokenResponse.isAdmin);
+        this.authService.identityCheck();
+
+        this.toastrService.message(
+          'Kullanıcı girişi başarıyla sağlanmıştır.',
+          'Giriş Başarılı',
+          {
+            messageType: ToastrMessageType.Success,
+            position: ToastrPosition.TopRight,
+          }
+        );
+      }
+
+      callBackFunction();
+    } catch (error) {
+      // Fallback to mock login if API fails
+      const mockTokenResponse = this.mockDataService.validateMockLogin(
+        userNameOrEmail,
+        password
       );
 
-    const tokenResponse: TokenResponse = (await firstValueFrom(
-      observable
-    )) as TokenResponse;
+      if (mockTokenResponse) {
+        localStorage.setItem('accessToken', mockTokenResponse.token.accessToken);
+        localStorage.setItem('refreshToken', mockTokenResponse.token.refreshToken);
+        this.authService.setAdminStatus(mockTokenResponse.isAdmin);
+        this.authService.identityCheck();
 
-    if (tokenResponse) {
-      localStorage.setItem('accessToken', tokenResponse.token.accessToken);
-      localStorage.setItem('refreshToken', tokenResponse.token.refreshToken);
-      debugger;
-      this.authService.setAdminStatus(tokenResponse.isAdmin);
-      this.authService.identityCheck();
-
-      this.toastrService.message(
-        'Kullanıcı girişi başarıyla sağlanmıştır.',
-        'Giriş Başarılı',
-        {
-          messageType: ToastrMessageType.Success,
-          position: ToastrPosition.TopRight,
-        }
-      );
+        this.toastrService.message(
+          'Kullanıcı girişi başarıyla sağlanmıştır. (Mock Data)',
+          'Giriş Başarılı',
+          {
+            messageType: ToastrMessageType.Success,
+            position: ToastrPosition.TopRight,
+          }
+        );
+        callBackFunction();
+      } else {
+        this.toastrService.message(
+          'Kullanıcı adı veya şifre hatalı!',
+          'Giriş Başarısız',
+          {
+            messageType: ToastrMessageType.Error,
+            position: ToastrPosition.TopRight,
+          }
+        );
+        throw new Error('Invalid credentials');
+      }
     }
-
-    callBackFunction();
   }
 
   async googleLogin(

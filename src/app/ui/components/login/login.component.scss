@@ -80,6 +80,56 @@
 }
 
 .login-body {
+  .mock-info-box {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+
+    .info-icon {
+      color: #6366f1;
+      flex-shrink: 0;
+      margin-top: 0.125rem;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .info-content {
+      flex: 1;
+      font-size: 0.8125rem;
+      color: #64748b;
+      line-height: 1.6;
+
+      strong {
+        color: #1e293b;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 1.25rem;
+        list-style: disc;
+
+        li {
+          margin-bottom: 0.25rem;
+
+          strong {
+            display: inline;
+            color: #6366f1;
+          }
+        }
+      }
+    }
+  }
+
   .form-group {
     margin-bottom: 1.5rem;
 

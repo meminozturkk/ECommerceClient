@@ -5,12 +5,16 @@ import { Observable, firstValueFrom } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { List_Product } from 'src/app/contracts/list_product';
 import { List_Product_Image } from 'src/app/contracts/list_product_image';
+import { MockDataService } from './mock-data.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  constructor(private httpClientService: HttpClientService) {}
+  constructor(
+    private httpClientService: HttpClientService,
+    private mockDataService: MockDataService
+  ) { }
 
   create(
     product: Create_Product,
@@ -168,15 +172,23 @@ export class ProductService {
   async getById(id: string): Promise<{
     product: List_Product;
   }> {
-    const product = await this.httpClientService
-      .get<{ product: List_Product }>(
-        {
-          controller: 'product',
-        },
-        id
-      )
-      .toPromise();
-    console.log(product);
-    return product;
+    try {
+      const product = await this.httpClientService
+        .get<{ product: List_Product }>(
+          {
+            controller: 'product',
+          },
+          id
+        )
+        .toPromise();
+      console.log(product);
+      return product;
+    } catch (error) {
+      // Fallback to mock data if API fails
+      const mockProduct = this.mockDataService.getMockProductById(id);
+      return {
+        product: mockProduct as List_Product
+      };
+    }
   }
 }

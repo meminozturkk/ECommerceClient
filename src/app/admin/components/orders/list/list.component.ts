@@ -67,10 +67,16 @@ export class ListComponent extends BaseComponent implements OnInit {
     await this.getOrders();
   }
   showDetail(id: string) {
-    debugger;
     this.dialogService.openDialog({
       componentType: OrderDetailDialogComponent,
       data: id,
     });
+  }
+
+  formatPrice(price: number): string {
+    return new Intl.NumberFormat('tr-TR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(price) + ' ₺';
   }
 }

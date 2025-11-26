@@ -5,23 +5,51 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private jwtHelper: JwtHelperService) {}
+  constructor(private jwtHelper: JwtHelperService) { }
 
   identityCheck() {
     const token: string = localStorage.getItem('accessToken');
 
-    //const decodeToken = this.jwtHelper.decodeToken(token);
-    //const expirationDate: Date = this.jwtHelper.getTokenExpirationDate(token);
-    let expired: boolean;
+    if (!token) {
+      _isAuthenticated = false;
+      return;
+    }
+
+    // Check if it's a mock token (starts with "mock_")
+    if (token.startsWith('mock_')) {
+      // For mock tokens, check if it has valid format (3 parts separated by dots)
+      const parts = token.split('.');
+      if (parts.length === 3) {
+        // Valid mock token format
+        _isAuthenticated = true;
+        return;
+      } else {
+        // Invalid mock token format, clear it
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        _isAuthenticated = false;
+        return;
+      }
+    }
+
+    // For real JWT tokens, use JWT helper
+    let expired: boolean = true;
     try {
       expired = this.jwtHelper.isTokenExpired(token);
-    } catch {
+    } catch (error) {
+      // If token validation fails, consider it expired
       expired = true;
     }
-    debugger;
-    const decodedToken = this.jwtHelper.decodeToken(token);
 
-    _isAuthenticated = token != null && !expired;
+    try {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      _isAuthenticated = token != null && !expired;
+    } catch (error) {
+      // If token is invalid, clear it and set as not authenticated
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+      _isAuthenticated = false;
+    }
   }
   setAdminStatus(isAdmin: boolean) {
     _isAdmin = isAdmin;

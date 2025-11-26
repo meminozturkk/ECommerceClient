@@ -13,6 +13,7 @@ import {
 import { Create_Order } from 'src/app/contracts/create_order';
 import { OrderService } from 'src/app/services/common/models/order.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
+import { MockDataService } from 'src/app/services/common/models/mock-data.service';
 
 declare var $: any;
 
@@ -28,7 +29,8 @@ export class BasketsComponent extends BaseComponent implements OnInit {
     private orderService: OrderService,
     private toastrService: CustomToastrService,
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    private mockDataService: MockDataService
   ) {
     super(spinner);
   }
@@ -83,17 +85,29 @@ export class BasketsComponent extends BaseComponent implements OnInit {
     this.router.navigate(['/']);
   }
   async getProductStock() {
-    debugger;
-    const productList = await this.productService.list();
-    this.basketItemsWithStock = this.basketItems.map((basketItem) => {
-      const product = productList.products.find(
-        (p) => p.name == basketItem.name
-      );
-      return {
-        ...basketItem,
-        stock: product ? product.stock : 0,
-      };
-    });
-    console.log(this.basketItemsWithStock);
+    try {
+      const productList = await this.productService.list();
+      this.basketItemsWithStock = this.basketItems.map((basketItem) => {
+        const product = productList.products.find(
+          (p) => p.name == basketItem.name
+        );
+        return {
+          ...basketItem,
+          stock: product ? product.stock : 0,
+        };
+      });
+    } catch (error) {
+      // Fallback to mock data if API fails
+      const mockProducts = this.mockDataService.getMockProducts();
+      this.basketItemsWithStock = this.basketItems.map((basketItem) => {
+        const product = mockProducts.find(
+          (p) => p.name == basketItem.name
+        );
+        return {
+          ...basketItem,
+          stock: product ? product.stock : 0,
+        };
+      });
+    }
   }
 }

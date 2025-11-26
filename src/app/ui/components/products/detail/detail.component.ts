@@ -13,6 +13,7 @@ import {
   ToastrMessageType,
   ToastrPosition,
 } from 'src/app/services/ui/custom-toastr.service';
+import { MockDataService } from 'src/app/services/common/models/mock-data.service';
 
 @Component({
   selector: 'app-detail',
@@ -30,21 +31,41 @@ export class DetailComponent extends BaseComponent implements OnInit {
     private fileService: FileService,
     private basketService: BasketService,
     private customToastrService: CustomToastrService,
-    spinner: NgxSpinnerService
+    spinner: NgxSpinnerService,
+    private mockDataService: MockDataService
   ) {
     super(spinner);
   }
   async ngOnInit() {
     this.productId = this.route.snapshot.paramMap.get('id')!;
-    this.baseUrl = await this.fileService.getBaseStorageUrl();
+    try {
+      this.baseUrl = await this.fileService.getBaseStorageUrl();
+    } catch (error) {
+      // Fallback baseUrl for mock data
+      this.baseUrl = { url: '' } as BaseUrl;
+    }
     this.getProductById(this.productId);
   }
   async getProductById(productid: string) {
-    const response = await this.productService.getById(productid);
-    this.product = response;
-    console.log(response);
-    console.log(this.product);
+    this.showSpinner(SpinnerType.BallBeat);
+    try {
+      const response = await this.productService.getById(productid);
+      this.product = response.product || response;
+    } catch (error) {
+      // Fallback to mock data if API fails
+      const mockProduct = this.mockDataService.getMockProductById(productid);
+      this.product = mockProduct;
+    } finally {
+      this.hideSpinner(SpinnerType.BallBeat);
+    }
   }
+  formatPrice(price: number): string {
+    return new Intl.NumberFormat('tr-TR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(price) + ' ₺';
+  }
+
   async addToBasket(product: List_Product) {
     this.showSpinner(SpinnerType.BallBeat);
     let _basketItem: Create_Basket_Item = new Create_Basket_Item();

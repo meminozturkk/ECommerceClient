@@ -8,7 +8,7 @@
     <div class="product-card" *ngFor="let product of products">
       <div class="product-image-container">
         <img 
-          [src]="product.productImageFile.length ? (baseUrl.url + '/' + product.path) : 'assets/default.webp'" 
+          [src]="product.productImageFile?.length ? (baseUrl?.url ? (baseUrl.url + '/' + product.path) : product.path) : (product.path || 'assets/product.png')" 
           alt="Product Image"
           class="product-image">
         <div class="product-overlay">
@@ -27,7 +27,7 @@
       <div class="product-details">
         <h5 class="product-title">{{ product.name }}</h5>
         <div class="product-meta">
-          <span class="product-price">{{ product.price | currency:'TRY':'symbol':'1.2-2' }}</span>
+          <span class="product-price">{{ product.price | number:'1.2-2' }} ₺</span>
           <span class="product-stock" [ngClass]="{'low-stock': product.stock < 10 && product.stock > 0, 'out-of-stock': product.stock === 0}">
             {{ product.stock > 0 ? (product.stock + ' adet') : 'Stokta yok' }}
           </span>

@@ -1,54 +1,104 @@
-<div class="table-container">
-  <table mat-table [dataSource]="dataSource" class="mat-table">
-    <!-- Ürün İsmi Sütunu -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Ürün İsmi </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-    <!-- Diğer sütunlar -->
-    <ng-container matColumnDef="stock">
-      <th mat-header-cell *matHeaderCellDef> Stok Sayısı </th>
-      <td mat-cell *matCellDef="let element"> {{element.stock}} </td>
-    </ng-container>
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef> Fiyat </th>
-      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-    </ng-container>
-    <ng-container matColumnDef="createdDate">
-      <th mat-header-cell *matHeaderCellDef> Oluşturma Tarihi </th>
-      <td mat-cell *matCellDef="let element"> {{element.createdDate | date: 'dd.MM.yyyy HH:mm'}} </td>
-    </ng-container>
-    <!-- <ng-container matColumnDef="qrcode">
-      <th mat-header-cell *matHeaderCellDef width="30"></th>
-      <td mat-cell *matCellDef="let element">
-        <img style="cursor:pointer" src="../../../../../assets/qrcode.png" width="25" height="25" (click)="showQRCode(element.id)" />
-      </td>
-    </ng-container> -->
-    <ng-container matColumnDef="updatedDate">
-      <th mat-header-cell *matHeaderCellDef> Güncelleme Tarihi </th>
-      <td mat-cell *matCellDef="let element"> {{element.updatedDate  |date: 'dd.MM.yyyy HH:mm'}} </td>
-    </ng-container>
-    <ng-container matColumnDef="photos">
-      <th mat-header-cell *matHeaderCellDef> Fotoğraf </th>
-      <td mat-cell *matCellDef="let element">
-        <img style="cursor: pointer;" src="assets/gallery.png" width="20px" height="20px" (click)="openProductImages(element.id)" />
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="qrcode">
-      <th mat-header-cell *matHeaderCellDef> Düzenle </th>
-      <td mat-cell *matCellDef="let element">
-        <img style="cursor: pointer;" src="../../../../../assets/qrcode.svg" width="20px" height="20px" (click)="showQRCode(element.id)"/>
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef> Sil </th>
-      <td mat-cell *matCellDef="let element" [id]="element.id" appDelete (updateList)="getProducts()" controller="product"></td>
-    </ng-container>
-    <!-- Kolonların satırdaki sırasını belirle -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  <!-- Sayfalama -->
-  <mat-paginator (page)="pageChanged()" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
-  </mat-paginator>
+<div class="products-admin-container">
+  <div class="page-header">
+    <div class="header-content">
+      <div>
+        <h1>Ürün Yönetimi</h1>
+        <p>Tüm ürünleri görüntüleyin ve yönetin</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource" class="modern-table">
+        <!-- Ürün İsmi Sütunu -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Ürün İsmi</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="product-name-cell">{{ element.name }}</div>
+          </td>
+        </ng-container>
+
+        <!-- Stok Sütunu -->
+        <ng-container matColumnDef="stock">
+          <th mat-header-cell *matHeaderCellDef>Stok Sayısı</th>
+          <td mat-cell *matCellDef="let element">
+            <span class="stock-badge" [ngClass]="{'low-stock': element.stock < 10, 'out-of-stock': element.stock === 0}">
+              {{ element.stock }}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Fiyat Sütunu -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Fiyat</th>
+          <td mat-cell *matCellDef="let element">
+            <span class="price-cell">{{ formatPrice(element.price) }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Oluşturma Tarihi -->
+        <ng-container matColumnDef="createdDate">
+          <th mat-header-cell *matHeaderCellDef>Oluşturma Tarihi</th>
+          <td mat-cell *matCellDef="let element">
+            <span class="date-cell">{{ element.createdDate | date: 'dd.MM.yyyy HH:mm' }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Güncelleme Tarihi -->
+        <ng-container matColumnDef="updatedDate">
+          <th mat-header-cell *matHeaderCellDef>Güncelleme Tarihi</th>
+          <td mat-cell *matCellDef="let element">
+            <span class="date-cell">{{ element.updatedDate | date: 'dd.MM.yyyy HH:mm' }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Fotoğraf Sütunu -->
+        <ng-container matColumnDef="photos">
+          <th mat-header-cell *matHeaderCellDef>Fotoğraf</th>
+          <td mat-cell *matCellDef="let element">
+            <button class="icon-btn" (click)="openProductImages(element.id)" title="Fotoğrafları Görüntüle">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+            </button>
+          </td>
+        </ng-container>
+
+        <!-- QR Code Sütunu -->
+        <ng-container matColumnDef="qrcode">
+          <th mat-header-cell *matHeaderCellDef>QR Kod</th>
+          <td mat-cell *matCellDef="let element">
+            <button class="icon-btn" (click)="showQRCode(element.id)" title="QR Kod Göster">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+            </button>
+          </td>
+        </ng-container>
+
+        <!-- Sil Sütunu -->
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef>İşlemler</th>
+          <td mat-cell *matCellDef="let element" [id]="element.id" appDelete (updateList)="getProducts()" controller="product">
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-header-row"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
+      </table>
+
+      <mat-paginator 
+        (page)="pageChanged()" 
+        [pageSizeOptions]="[5, 10, 20]" 
+        showFirstLastButtons 
+        aria-label="Sayfa seç">
+      </mat-paginator>
+    </div>
+  </div>
 </div>

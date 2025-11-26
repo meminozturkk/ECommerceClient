@@ -1,33 +1,25 @@
 <div class="product-detail-page">
   <div class="container">
-    <div class="product-detail-wrapper">
+    <div class="product-detail-wrapper" *ngIf="product">
       <!-- Product Images -->
       <div class="product-images">
-        <div id="productImageCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div id="productImageCarousel" class="carousel slide" data-bs-ride="carousel"
+          *ngIf="product && product.productImageFile && product.productImageFile.length > 0">
           <div class="carousel-inner">
-            <div 
-              *ngFor="let image of product.productImageFile; let i = index" 
+            <div *ngFor="let image of product.productImageFile; let i = index"
               [ngClass]="{'carousel-item': true, 'active': i === 0}">
               <div class="image-wrapper">
-                <img 
-                  [src]="baseUrl.url + '/' + image.path" 
-                  class="d-block w-100 product-main-image" 
-                  alt="Product image">
+                <img [src]="baseUrl?.url ? (baseUrl.url + '/' + image.path) : image.path"
+                  class="d-block w-100 product-main-image" alt="Product image">
               </div>
             </div>
           </div>
-          <button 
-            class="carousel-control-prev" 
-            type="button" 
-            data-bs-target="#productImageCarousel" 
+          <button class="carousel-control-prev" type="button" data-bs-target="#productImageCarousel"
             data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button 
-            class="carousel-control-next" 
-            type="button" 
-            data-bs-target="#productImageCarousel" 
+          <button class="carousel-control-next" type="button" data-bs-target="#productImageCarousel"
             data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
@@ -36,11 +28,11 @@
       </div>
 
       <!-- Product Info -->
-      <div class="product-info">
+      <div class="product-info" *ngIf="product">
         <h1 class="product-title">{{ product.name }}</h1>
-        
+
         <div class="product-price-section">
-          <span class="product-price">{{ product.price | currency:'TRY':'symbol':'1.2-2' }}</span>
+          <span class="product-price">{{ formatPrice(product.price) }}</span>
           <span class="product-shipping">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z"></path>
@@ -61,13 +53,11 @@
 
         <div class="product-description">
           <h3>Ürün Açıklaması</h3>
-          <p>{{ product.name }}</p>
+          <p>{{ product.description || product.name }}</p>
         </div>
 
         <div class="product-actions">
-          <button 
-            class="btn btn-primary btn-add-to-cart" 
-            (click)="addToBasket(product)"
+          <button class="btn btn-primary btn-add-to-cart" (click)="addToBasket(product)"
             [disabled]="product.stock === 0">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="9" cy="21" r="1"></circle>
@@ -77,6 +67,19 @@
             Sepete Ekle
           </button>
         </div>
+      </div>
+    </div>
+
+    <!-- Loading or Not Found State -->
+    <div class="product-not-found" *ngIf="!product">
+      <div class="not-found-content">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <h2>Ürün Yükleniyor...</h2>
+        <p>Lütfen bekleyiniz.</p>
       </div>
     </div>
   </div>
