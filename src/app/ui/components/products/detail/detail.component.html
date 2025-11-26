@@ -1,36 +1,83 @@
-<div class="container mt-5">
-    <div class="row">
-      <div class="col-md-6">
+<div class="product-detail-page">
+  <div class="container">
+    <div class="product-detail-wrapper">
+      <!-- Product Images -->
+      <div class="product-images">
         <div id="productImageCarousel" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
-            <div *ngFor="let image of product.productImageFile; let i = index" [ngClass]="{'carousel-item': true, 'active': i === 0}">
-              <img [src]="baseUrl.url + '/' + image.path" class="d-block w-100" alt="Product image">
+            <div 
+              *ngFor="let image of product.productImageFile; let i = index" 
+              [ngClass]="{'carousel-item': true, 'active': i === 0}">
+              <div class="image-wrapper">
+                <img 
+                  [src]="baseUrl.url + '/' + image.path" 
+                  class="d-block w-100 product-main-image" 
+                  alt="Product image">
+              </div>
             </div>
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#productImageCarousel" data-bs-slide="prev">
+          <button 
+            class="carousel-control-prev" 
+            type="button" 
+            data-bs-target="#productImageCarousel" 
+            data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#productImageCarousel" data-bs-slide="next">
+          <button 
+            class="carousel-control-next" 
+            type="button" 
+            data-bs-target="#productImageCarousel" 
+            data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
         </div>
       </div>
-      <div class="col-md-6">    
-        <h2>{{ product.name }}</h2>
-        <div class="d-flex justify-content-between">
-            <p class="ms-auto text-end"><strong>Kargo Süresi:</strong> 1 Gün İçerisinde Kargo</p>
+
+      <!-- Product Info -->
+      <div class="product-info">
+        <h1 class="product-title">{{ product.name }}</h1>
+        
+        <div class="product-price-section">
+          <span class="product-price">{{ product.price | currency:'TRY':'symbol':'1.2-2' }}</span>
+          <span class="product-shipping">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z"></path>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+            1 Gün İçerisinde Kargo
+          </span>
+        </div>
+
+        <div class="product-stock-section">
+          <div class="stock-badge" [ngClass]="{'in-stock': product.stock > 0, 'out-of-stock': product.stock === 0}">
+            <span class="stock-dot"></span>
+            <span *ngIf="product.stock > 0">{{ product.stock }} adet stokta</span>
+            <span *ngIf="product.stock === 0">Stokta yok</span>
           </div>
-        <p><strong>Ücret:</strong> {{ product.price | currency:'TRY' }}</p>
-        <p><strong>Stok:</strong> {{ product.stock }}</p>
-        <br>
-        <hr class="new">
-        <p>{{ product.name }}</p>   
-        <hr class="new"> 
-        <div class="btn-class d-flex justify-content-start align-items-center">          
-          <button class="btn btn-primary" (click)="addToBasket(product)">Sepete Ekle</button>
+        </div>
+
+        <div class="product-description">
+          <h3>Ürün Açıklaması</h3>
+          <p>{{ product.name }}</p>
+        </div>
+
+        <div class="product-actions">
+          <button 
+            class="btn btn-primary btn-add-to-cart" 
+            (click)="addToBasket(product)"
+            [disabled]="product.stock === 0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            Sepete Ekle
+          </button>
         </div>
       </div>
     </div>
   </div>
+</div>

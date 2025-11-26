@@ -1,44 +1,96 @@
-<div id="exampleModal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Alışveriş Sepeti</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
+<div class="basket-modal">
+  <div class="modal-header-modern">
+    <h5 class="modal-title-modern">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+      </svg>
+      Alışveriş Sepeti
+    </h5>
+    <button type="button" class="btn-close-modern" data-bs-dismiss="modal" aria-label="Close">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
   
-  
-  
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Ürün</th>
-                <th scope="col">Fiyat</th>
-                <th scope="col">Adet</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="{{basketItem.basketItemId}}" *ngFor="let basketItem of basketItemsWithStock;let i = index">
-                <th scope="row">{{i + 1}}</th>
-                <td>{{basketItem.name}}</td>
-                <td>{{basketItem.price}}</td>
-                <td>
-                  <input type="number" [value]="basketItem.quantity" style="width:60px;" [attr.data-id]="basketItem.asketItemId" [attr.min]="1"
-                  [attr.max]="basketItem.stock + basketItem.quantity" (change)="changeQuantity($event)" />
-                </td>
-                <td>
-                  <button type="button" class="btn btn-danger" (click)="removeBasketItem(basketItem.basketItemId)">X</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+  <div class="modal-body-modern">
+    <div class="basket-empty" *ngIf="!basketItemsWithStock || basketItemsWithStock.length === 0">
+      <div class="empty-icon">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+      </div>
+      <h4>Sepetiniz Boş</h4>
+      <p>Alışverişe başlamak için ürün ekleyin</p>
+      <button type="button" class="btn btn-primary" data-bs-dismiss="modal" routerLink="/products">
+        Ürünlere Git
+      </button>
+    </div>
 
-  
+    <div class="basket-content" *ngIf="basketItemsWithStock && basketItemsWithStock.length > 0">
+      <div class="basket-items">
+        <div class="basket-item" *ngFor="let basketItem of basketItemsWithStock; let i = index">
+          <div class="item-number">{{ i + 1 }}</div>
+          <div class="item-info">
+            <h6 class="item-name">{{ basketItem.name }}</h6>
+            <div class="item-price">{{ basketItem.price | currency:'TRY':'symbol':'1.2-2' }}</div>
+          </div>
+          <div class="item-quantity">
+            <label>Adet</label>
+            <input 
+              type="number" 
+              [value]="basketItem.quantity" 
+              [id]="basketItem.basketItemId"
+              [attr.data-id]="basketItem.basketItemId" 
+              [attr.min]="1"
+              [attr.max]="basketItem.stock + basketItem.quantity" 
+              (change)="changeQuantity($event)"
+              class="quantity-input">
+          </div>
+          <button 
+            type="button" 
+            class="btn-remove" 
+            (click)="removeBasketItem(basketItem.basketItemId)"
+            title="Kaldır">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Kapat</button>
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="shoppingComplete() ">Alışverişi Tamamla</button>
+      </div>
+
+      <div class="basket-summary">
+        <div class="summary-row">
+          <span>Toplam Ürün:</span>
+          <strong>{{ basketItemsWithStock.length }} adet</strong>
+        </div>
+        <div class="summary-row total">
+          <span>Toplam Tutar:</span>
+          <strong>{{ getTotalPrice() | currency:'TRY':'symbol':'1.2-2' }}</strong>
         </div>
       </div>
     </div>
+  </div>
+  
+  <div class="modal-footer-modern" *ngIf="basketItemsWithStock && basketItemsWithStock.length > 0">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+      Kapat
+    </button>
+    <button 
+      type="button" 
+      class="btn btn-success btn-complete" 
+      data-bs-dismiss="modal" 
+      (click)="shoppingComplete()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+      Alışverişi Tamamla
+    </button>
+  </div>
+</div>

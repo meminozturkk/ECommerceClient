@@ -43,23 +43,30 @@ export class BasketsComponent extends BaseComponent implements OnInit {
 
   async changeQuantity(object: any) {
     this.showSpinner(SpinnerType.BallBeat);
-    const basketItemId: string = object.target.attributes['id'].value;
+    const basketItemId: string = object.target.attributes['data-id'].value;
     const quantity: number = object.target.value;
     const basketItem: Update_Basket_Item = new Update_Basket_Item();
     basketItem.basketItemId = basketItemId;
     basketItem.quantity = quantity;
     await this.basketService.updateQuantity(basketItem);
+    await this.ngOnInit(); // Refresh basket items
     this.hideSpinner(SpinnerType.BallBeat);
   }
 
   async removeBasketItem(basketItemId: string) {
     this.showSpinner(SpinnerType.BallBeat);
     await this.basketService.remove(basketItemId);
+    await this.ngOnInit(); // Refresh basket items
+    this.hideSpinner(SpinnerType.BallBeat);
+  }
 
-    var a = $('.' + basketItemId);
-    $('.' + basketItemId).fadeOut(500, () =>
-      this.hideSpinner(SpinnerType.BallBeat)
-    );
+  getTotalPrice(): number {
+    if (!this.basketItemsWithStock || this.basketItemsWithStock.length === 0) {
+      return 0;
+    }
+    return this.basketItemsWithStock.reduce((total, item) => {
+      return total + (item.price * item.quantity);
+    }, 0);
   }
   async shoppingComplete() {
     this.showSpinner(SpinnerType.BallBeat);

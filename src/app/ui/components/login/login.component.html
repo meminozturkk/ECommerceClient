@@ -1,25 +1,65 @@
-<div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="username">Kullanıcı Adı - E-Posta</label>
-        <input #txtUsernameOrEmail type="text" class="form-control" id="username" placeholder="Kullanıcı Adı & E-Posta">
-        <small class="form-text text-muted invalid-feedback">***</small>
-      </div>
-     
-      <div class="form-group">
-        <label for="password">Şifre</label>
-        <input #txtPassword type="password" class="form-control" id="password" placeholder="Şifre">
-
-        <asl-google-signin-button>  
-        </asl-google-signin-button>
-
-        <img src="../../../assets/facebook.png" style="width: 30px; height: 30px; cursor:pointer;" (click)="facebookLogin()" />
-        <br />
+<div class="login-container">
+  <div class="login-wrapper">
+    <div class="login-card">
+      <div class="login-header">
+        <h2>Hoş Geldiniz</h2>
+        <p>Hesabınıza giriş yapın</p>
       </div>
       
-      <button style="margin-top:5px;" type="submit" class="btn btn-primary" (click)="login(txtUsernameOrEmail.value, txtPassword.value)">Giriş Yap</button>
-      <a style="margin-top:5px;margin-left:5px;" routerLink="/password-reset" class="btn btn-secondary">Şifremi Unuttum</a>
+      <div class="login-body">
+        <div class="form-group">
+          <label for="username">Kullanıcı Adı veya E-Posta</label>
+          <input 
+            #txtUsernameOrEmail 
+            type="text" 
+            class="form-control" 
+            id="username" 
+            placeholder="Kullanıcı adınız veya e-posta adresiniz">
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Şifre</label>
+          <input 
+            #txtPassword 
+            type="password" 
+            class="form-control" 
+            id="password" 
+            placeholder="Şifreniz">
+        </div>
+        
+        <div class="social-login">
+          <p class="social-divider">
+            <span>veya</span>
+          </p>
+          <div class="social-buttons">
+            <asl-google-signin-button class="social-btn google-btn">
+            </asl-google-signin-button>
+            <button type="button" class="social-btn facebook-btn" (click)="facebookLogin()">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+              <span>Facebook ile Giriş</span>
+            </button>
+          </div>
+        </div>
+        
+        <button 
+          type="submit" 
+          class="btn btn-primary btn-login" 
+          (click)="login(txtUsernameOrEmail.value, txtPassword.value)">
+          Giriş Yap
+        </button>
+        
+        <div class="login-footer">
+          <a routerLink="/password-reset" class="forgot-password">
+            Şifremi Unuttum
+          </a>
+          <p class="register-link">
+            Hesabınız yok mu? 
+            <a routerLink="/register">Kayıt Ol</a>
+          </p>
+        </div>
+      </div>
     </div>
-    <div class="col-md-3"></div>
   </div>
+</div>
